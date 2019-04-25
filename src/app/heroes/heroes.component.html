@@ -1,0 +1,26 @@
+
+
+<div>
+  <form (keydown)="keyDownFunction($event)">
+ 
+  <label>message:
+    <input [(ngModel)]="message" placeholder="name" name="first"/>
+  </label>
+  </form>
+</div>
+<h2>{{messageSid }} </h2>
+<div>
+     <tr *ngFor="let message of toutouMessages">
+      <td> <p>{{message.date | date: 'dd/MM/yyyy'}} Message : {{message.value}} </p></td>
+   </tr>
+</div>
+<div class="row">
+    
+  </div>
+
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
