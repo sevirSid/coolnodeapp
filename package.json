@@ -3,11 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "engines": {
-    "node": "10.x"
+    "node" : "~8.15.1",
+    "npm" : "~6.4.1"
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "ng": "ng",
+    "start": "node server.js",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot --prod"
   },
   "dependencies": {
     "ejs": "^2.5.6",
