@@ -261,8 +261,109 @@ const PassportPhotoGenerator = () => {
         setActiveHandle(null);
     };
 
+    // Fonction améliorée pour générer la photo d'identité avec fond correctement appliqué
+const generatePassportPhoto = () => {
+    if (!image) return;
+
+    // Dimensions de la photo finale
+    let width, height;
+    if (photoSize === 'custom') {
+        width = customWidth * 10;  // mm à pixels
+        height = customHeight * 10;
+    } else {
+        const [w, h] = photoSize.split('x');
+        width = parseInt(w) * 10;
+        height = parseInt(h) * 10;
+    }
+
+    // Créer le canvas temporaire à la taille finale
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = width;
+    tempCanvas.height = height;
+    const ctx = tempCanvas.getContext('2d');
+
+    // Remplir tout le canvas avec la couleur d'arrière-plan
+    ctx.fillStyle = backgroundColor;
+    ctx.fillRect(0, 0, width, height);
+
+    // Calculer la taille que devrait avoir la tête
+    const headRatio = 0.75;  // Standard: la tête fait 70-80% de la hauteur
+    const headHeight = height * headRatio;
+
+    // Calculer le facteur d'échelle en fonction du curseur de zoom
+    // et de la taille du visage identifiée
+    const scale = headHeight / (faceSize * (scaleFactor / 100));
+
+    // Position verticale basée sur le curseur
+    const verticalPositionPercent = verticalPosition / 100;
+
+    // Calculer la position de l'image originale sur le canvas
+    const destX = width / 2 - facePosition.x * scale;
+    const destY = height * verticalPositionPercent - (facePosition.y - faceSize / 2) * scale;
+
+    // Dessiner l'image source sur le canvas avec arrière-plan
+    ctx.drawImage(
+        image,
+        destX, destY,
+        image.width * scale, image.height * scale
+    );
+
+    // Option pour traiter les ombres (suppression de base)
+    if (removeShades) {
+        try {
+            // Obtenir les données d'image
+            const imageData = ctx.getImageData(0, 0, width, height);
+            const data = imageData.data;
+            
+            // Paramètres pour la détection d'ombres
+            const shadowThreshold = shadowThresholdValue; // Valeur de seuil ajustable
+            const backgroundColorRGB = hexToRgb(backgroundColor);
+            
+            for (let i = 0; i < data.length; i += 4) {
+                // Calculer la luminosité du pixel
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+                
+                // Différence de luminosité avec l'arrière-plan
+                const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+                const bgLuminance = 0.299 * backgroundColorRGB.r + 0.587 * backgroundColorRGB.g + 0.114 * backgroundColorRGB.b;
+                
+                // Si le pixel est sombre (ombre potentielle)
+                if (Math.abs(luminance - bgLuminance) < shadowThreshold) {
+                    data[i] = backgroundColorRGB.r;
+                    data[i + 1] = backgroundColorRGB.g;
+                    data[i + 2] = backgroundColorRGB.b;
+                }
+            }
+            
+            // Appliquer les modifications
+            ctx.putImageData(imageData, 0, 0);
+        } catch (e) {
+            console.error("Erreur lors du traitement des ombres:", e);
+        }
+    }
+
+    // Convertir le canvas en dataURL
+    const dataUrl = tempCanvas.toDataURL('image/jpeg', 0.95);
+    setResultImage(dataUrl);
+};
+
+// Fonction utilitaire pour convertir une couleur hexadécimale en RGB
+const hexToRgb = (hex) => {
+    // Supprimer le # si présent
+    hex = hex.replace(/^#/, '');
+    
+    // Convertir en valeurs RGB
+    let bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    
+    return { r, g, b };
+};
     // Génération de la photo d'identité
-    const generatePassportPhoto = () => {
+    const generatePassportPhoto1 = () => {
         if (!image) return;
 
         // Dimensions de la photo finale
