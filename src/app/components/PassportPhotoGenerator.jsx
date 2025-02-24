@@ -17,6 +17,10 @@ const PassportPhotoGenerator = () => {
     const [customWidth, setCustomWidth] = useState(35);
     const [customHeight, setCustomHeight] = useState(45);
     const [resultImage, setResultImage] = useState(null);
+    {/* Ajoutez ces nouveaux états au début de votre composant */}
+    const [removeShades, setRemoveShades] = useState(false);
+    const [shadowThresholdValue, setShadowThresholdValue] = useState(30);
+    const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
     
     // Nouveaux états pour les ajustements fins
     const [verticalPosition, setVerticalPosition] = useState(60); // Position verticale en pourcentage
@@ -495,6 +499,80 @@ const hexToRgb = (hex) => {
                                         onChange={(e) => setBackgroundColor(e.target.value)}
                                         className="w-full h-10 rounded border"
                                     />
+                                </div>
+
+                                {/* Ajoutez ces contrôles sous le choix de la couleur d'arrière-plan */}
+                                <div className="mb-4">
+                                    <button 
+                                        onClick={() => setShowAdvancedOptions(!showAdvancedOptions)}
+                                        className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded flex justify-between items-center"
+                                    >
+                                        Options avancées
+                                        <span>{showAdvancedOptions ? '▲' : '▼'}</span>
+                                    </button>
+                                    
+                                    {showAdvancedOptions && (
+                                        <div className="mt-2 p-3 border rounded bg-gray-50">
+                                            <div className="mb-3">
+                                                <div className="flex items-center">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="removeShades"
+                                                        checked={removeShades}
+                                                        onChange={(e) => setRemoveShades(e.target.checked)}
+                                                        className="mr-2 h-4 w-4"
+                                                    />
+                                                    <label htmlFor="removeShades" className="text-sm font-medium">
+                                                        Supprimer les ombres
+                                                    </label>
+                                                </div>
+                                                <p className="text-xs text-gray-500 mt-1">
+                                                    Tente de détecter et supprimer les ombres sur l'arrière-plan
+                                                </p>
+                                            </div>
+                                            
+                                            {removeShades && (
+                                                <div className="mb-2">
+                                                    <label className="block text-sm font-medium mb-1">
+                                                        Sensibilité de détection ({shadowThresholdValue})
+                                                    </label>
+                                                    <input
+                                                        type="range"
+                                                        min="10"
+                                                        max="100"
+                                                        value={shadowThresholdValue}
+                                                        onChange={(e) => setShadowThresholdValue(parseInt(e.target.value))}
+                                                        className="w-full"
+                                                    />
+                                                    <p className="text-xs text-gray-500 mt-1">
+                                                        Valeur plus élevée = plus de pixels considérés comme ombres
+                                                    </p>
+                                                </div>
+                                            )}
+                                            
+                                            <div className="mb-2">
+                                                <button
+                                                    onClick={() => {
+                                                        setBackgroundColor('#FFFFFF'); // Blanc
+                                                        setShadowThresholdValue(30);
+                                                    }}
+                                                    className="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium py-1 px-2 rounded mr-2"
+                                                >
+                                                    Photo standard
+                                                </button>
+                                                
+                                                <button
+                                                    onClick={() => {
+                                                        setBackgroundColor('#B3D9F1'); // Bleu clair
+                                                        setShadowThresholdValue(45);
+                                                    }}
+                                                    className="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium py-1 px-2 rounded"
+                                                >
+                                                    Visa US
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="mb-4">
