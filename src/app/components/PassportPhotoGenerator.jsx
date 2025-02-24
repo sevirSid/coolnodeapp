@@ -3,7 +3,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 
 const PassportPhotoGenerator = () => {
-    // États
+    // États existants
     const [image, setImage] = useState(null);
     const [facePosition, setFacePosition] = useState({x: 0, y: 0});
     const [faceSize, setFaceSize] = useState(200);
@@ -17,6 +17,10 @@ const PassportPhotoGenerator = () => {
     const [customWidth, setCustomWidth] = useState(35);
     const [customHeight, setCustomHeight] = useState(45);
     const [resultImage, setResultImage] = useState(null);
+    
+    // Nouveaux états pour les ajustements fins
+    const [verticalPosition, setVerticalPosition] = useState(60); // Position verticale en pourcentage
+    const [scaleFactor, setScaleFactor] = useState(120); // Facteur d'échelle en pourcentage (120 = 1.2)
 
     // Références
     const canvasRef = useRef(null);
@@ -257,102 +261,69 @@ const PassportPhotoGenerator = () => {
         setActiveHandle(null);
     };
 
-// Fonction corrigée pour générer la photo d'identité
-const generatePassportPhoto = () => {
-    if (!image) return;
+    // Génération de la photo d'identité
+    const generatePassportPhoto = () => {
+        if (!image) return;
 
-    // Dimensions de la photo finale
-    let width, height;
-    if (photoSize === 'custom') {
-        width = customWidth * 10;  // mm à pixels
-        height = customHeight * 10;
-    } else {
-        const [w, h] = photoSize.split('x');
-        width = parseInt(w) * 10;
-        height = parseInt(h) * 10;
-    }
+        // Dimensions de la photo finale
+        let width, height;
+        if (photoSize === 'custom') {
+            width = customWidth * 10;  // mm à pixels
+            height = customHeight * 10;
+        } else {
+            const [w, h] = photoSize.split('x');
+            width = parseInt(w) * 10;
+            height = parseInt(h) * 10;
+        }
 
-    // Créer un nouvel élément canvas temporaire
-    const tempCanvas = document.createElement('canvas');
-    tempCanvas.width = width;
-    tempCanvas.height = height;
-    const ctx = tempCanvas.getContext('2d');
+        // Créer un nouvel élément canvas temporaire
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = width;
+        tempCanvas.height = height;
+        const ctx = tempCanvas.getContext('2d');
 
-    // Remplir avec la couleur d'arrière-plan
-    ctx.fillStyle = backgroundColor;
-    ctx.fillRect(0, 0, width, height);
+        // Remplir avec la couleur d'arrière-plan
+        ctx.fillStyle = backgroundColor;
+        ctx.fillRect(0, 0, width, height);
 
-    // Calculer le ratio tête/photo (standard = 70-80% de la hauteur)
-    const headRatio = 0.75;
-    const headHeight = height * headRatio;
+        // Calculer le ratio tête/photo (standard = 70-80% de la hauteur)
+        const headRatio = 0.75;
+        const headHeight = height * headRatio;
 
-    // Calculer le ratio d'échelle pour ne pas couper la tête
-    // Utilisez la taille totale du visage plus une marge pour que la tête ne soit pas coupée
-    const scale = headHeight / (faceSize * 1.2); // Ajouter 20% de marge
+        // Utiliser les valeurs des sliders pour le positionnement
+        const scale = headHeight / (faceSize * (scaleFactor / 100));
+        const verticalPositionPercent = verticalPosition / 100;
 
-    // Position du visage centrée horizontalement et décalée vers le bas
-    // Modifiez cette valeur pour éviter que la tête ne soit coupée
-    const destX = width / 2 - facePosition.x * scale;
-    const destY = height * 0.6 - (facePosition.y - faceSize / 2) * scale; // Décaler vers le bas (0.6 au lieu de 0.45)
+        // Position du visage centrée horizontalement et avec position verticale ajustable
+        const destX = width / 2 - facePosition.x * scale;
+        const destY = height * verticalPositionPercent - (facePosition.y - faceSize / 2) * scale;
 
-    // Dessiner l'image
-    ctx.drawImage(
-        image,
-        destX, destY,
-        image.width * scale, image.height * scale
-    );
+        // Dessiner l'image
+        ctx.drawImage(
+            image,
+            destX, destY,
+            image.width * scale, image.height * scale
+        );
 
-    // Convertir le canvas en dataURL
-    const dataUrl = tempCanvas.toDataURL('image/jpeg', 0.95);
-    setResultImage(dataUrl);
-};
-    // Génération de la photo d'identité - NOUVELLE IMPLEMENTATION
-    // const generatePassportPhoto1 = () => {
-    //     if (!image) return;
+        // Convertir le canvas en dataURL
+        const dataUrl = tempCanvas.toDataURL('image/jpeg', 0.95);
+        setResultImage(dataUrl);
+    };
 
-    //     // Dimensions de la photo finale
-    //     let width, height;
-    //     if (photoSize === 'custom') {
-    //         width = customWidth * 10;  // mm à pixels
-    //         height = customHeight * 10;
-    //     } else {
-    //         const [w, h] = photoSize.split('x');
-    //         width = parseInt(w) * 10;
-    //         height = parseInt(h) * 10;
-    //     }
+    // Fonction pour générer une prévisualisation en temps réel
+    const generatePreview = () => {
+        if (!image || !resultImage) return;
+        
+        // Générer une nouvelle photo avec les paramètres actuels
+        generatePassportPhoto();
+    };
 
-    //     // Créer un nouvel élément canvas temporaire
-    //     const tempCanvas = document.createElement('canvas');
-    //     tempCanvas.width = width;
-    //     tempCanvas.height = height;
-    //     const ctx = tempCanvas.getContext('2d');
-
-    //     // Remplir avec la couleur d'arrière-plan
-    //     ctx.fillStyle = backgroundColor;
-    //     ctx.fillRect(0, 0, width, height);
-
-    //     // Calculer le ratio tête/photo (standard = 70-80% de la hauteur)
-    //     const headRatio = 0.75;
-    //     const headHeight = height * headRatio;
-
-    //     // Calculer le ratio d'échelle
-    //     const scale = headHeight / faceSize;
-
-    //     // Position du visage centrée horizontalement et à 45% du haut
-    //     const destX = width / 2 - facePosition.x * scale;
-    //     const destY = height * 0.45 - (facePosition.y - faceSize / 2) * scale;
-
-    //     // Dessiner l'image
-    //     ctx.drawImage(
-    //         image,
-    //         destX, destY,
-    //         image.width * scale, image.height * scale
-    //     );
-
-    //     // Convertir le canvas en dataURL
-    //     const dataUrl = tempCanvas.toDataURL('image/jpeg', 0.95);
-    //     setResultImage(dataUrl);
-    // };
+    // Mise à jour de la prévisualisation lorsque les paramètres changent
+    useEffect(() => {
+        if (resultImage) {
+            generatePassportPhoto();
+        }
+    }, [verticalPosition, scaleFactor]);
 
     // Téléchargement de l'image générée
     const downloadImage = () => {
@@ -510,6 +481,42 @@ const generatePassportPhoto = () => {
                         {resultImage && (
                             <div className="mt-6 p-4 border rounded-lg">
                                 <h3 className="text-lg font-medium mb-2">Photo générée</h3>
+                                
+                                {/* Nouveaux contrôles d'ajustement */}
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium mb-1">
+                                        Position verticale ({verticalPosition}%)
+                                    </label>
+                                    <input
+                                        type="range"
+                                        min="40"
+                                        max="80"
+                                        value={verticalPosition}
+                                        onChange={(e) => setVerticalPosition(parseInt(e.target.value))}
+                                        className="w-full"
+                                    />
+                                    <p className="text-xs text-gray-500 mt-1">
+                                        Ajustez pour éviter que la tête ne soit coupée
+                                    </p>
+                                </div>
+                                
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium mb-1">
+                                        Zoom ({(scaleFactor/100).toFixed(2)}x)
+                                    </label>
+                                    <input
+                                        type="range"
+                                        min="100"
+                                        max="150"
+                                        value={scaleFactor}
+                                        onChange={(e) => setScaleFactor(parseInt(e.target.value))}
+                                        className="w-full"
+                                    />
+                                    <p className="text-xs text-gray-500 mt-1">
+                                        Ajustez pour modifier la taille du visage dans la photo
+                                    </p>
+                                </div>
+                                
                                 <div className="flex flex-col items-center">
                                     <img
                                         src={resultImage}
