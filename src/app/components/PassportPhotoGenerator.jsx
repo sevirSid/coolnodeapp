@@ -257,8 +257,57 @@ const PassportPhotoGenerator = () => {
         setActiveHandle(null);
     };
 
+// Fonction corrigée pour générer la photo d'identité
+const generatePassportPhoto = () => {
+    if (!image) return;
+
+    // Dimensions de la photo finale
+    let width, height;
+    if (photoSize === 'custom') {
+        width = customWidth * 10;  // mm à pixels
+        height = customHeight * 10;
+    } else {
+        const [w, h] = photoSize.split('x');
+        width = parseInt(w) * 10;
+        height = parseInt(h) * 10;
+    }
+
+    // Créer un nouvel élément canvas temporaire
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = width;
+    tempCanvas.height = height;
+    const ctx = tempCanvas.getContext('2d');
+
+    // Remplir avec la couleur d'arrière-plan
+    ctx.fillStyle = backgroundColor;
+    ctx.fillRect(0, 0, width, height);
+
+    // Calculer le ratio tête/photo (standard = 70-80% de la hauteur)
+    const headRatio = 0.75;
+    const headHeight = height * headRatio;
+
+    // Calculer le ratio d'échelle pour ne pas couper la tête
+    // Utilisez la taille totale du visage plus une marge pour que la tête ne soit pas coupée
+    const scale = headHeight / (faceSize * 1.2); // Ajouter 20% de marge
+
+    // Position du visage centrée horizontalement et décalée vers le bas
+    // Modifiez cette valeur pour éviter que la tête ne soit coupée
+    const destX = width / 2 - facePosition.x * scale;
+    const destY = height * 0.6 - (facePosition.y - faceSize / 2) * scale; // Décaler vers le bas (0.6 au lieu de 0.45)
+
+    // Dessiner l'image
+    ctx.drawImage(
+        image,
+        destX, destY,
+        image.width * scale, image.height * scale
+    );
+
+    // Convertir le canvas en dataURL
+    const dataUrl = tempCanvas.toDataURL('image/jpeg', 0.95);
+    setResultImage(dataUrl);
+};
     // Génération de la photo d'identité - NOUVELLE IMPLEMENTATION
-    const generatePassportPhoto = () => {
+    const generatePassportPhoto1 = () => {
         if (!image) return;
 
         // Dimensions de la photo finale
