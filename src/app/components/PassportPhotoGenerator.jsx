@@ -307,52 +307,52 @@ const generatePassportPhoto = () => {
     setResultImage(dataUrl);
 };
     // Génération de la photo d'identité - NOUVELLE IMPLEMENTATION
-    const generatePassportPhoto1 = () => {
-        if (!image) return;
+    // const generatePassportPhoto1 = () => {
+    //     if (!image) return;
 
-        // Dimensions de la photo finale
-        let width, height;
-        if (photoSize === 'custom') {
-            width = customWidth * 10;  // mm à pixels
-            height = customHeight * 10;
-        } else {
-            const [w, h] = photoSize.split('x');
-            width = parseInt(w) * 10;
-            height = parseInt(h) * 10;
-        }
+    //     // Dimensions de la photo finale
+    //     let width, height;
+    //     if (photoSize === 'custom') {
+    //         width = customWidth * 10;  // mm à pixels
+    //         height = customHeight * 10;
+    //     } else {
+    //         const [w, h] = photoSize.split('x');
+    //         width = parseInt(w) * 10;
+    //         height = parseInt(h) * 10;
+    //     }
 
-        // Créer un nouvel élément canvas temporaire
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = width;
-        tempCanvas.height = height;
-        const ctx = tempCanvas.getContext('2d');
+    //     // Créer un nouvel élément canvas temporaire
+    //     const tempCanvas = document.createElement('canvas');
+    //     tempCanvas.width = width;
+    //     tempCanvas.height = height;
+    //     const ctx = tempCanvas.getContext('2d');
 
-        // Remplir avec la couleur d'arrière-plan
-        ctx.fillStyle = backgroundColor;
-        ctx.fillRect(0, 0, width, height);
+    //     // Remplir avec la couleur d'arrière-plan
+    //     ctx.fillStyle = backgroundColor;
+    //     ctx.fillRect(0, 0, width, height);
 
-        // Calculer le ratio tête/photo (standard = 70-80% de la hauteur)
-        const headRatio = 0.75;
-        const headHeight = height * headRatio;
+    //     // Calculer le ratio tête/photo (standard = 70-80% de la hauteur)
+    //     const headRatio = 0.75;
+    //     const headHeight = height * headRatio;
 
-        // Calculer le ratio d'échelle
-        const scale = headHeight / faceSize;
+    //     // Calculer le ratio d'échelle
+    //     const scale = headHeight / faceSize;
 
-        // Position du visage centrée horizontalement et à 45% du haut
-        const destX = width / 2 - facePosition.x * scale;
-        const destY = height * 0.45 - (facePosition.y - faceSize / 2) * scale;
+    //     // Position du visage centrée horizontalement et à 45% du haut
+    //     const destX = width / 2 - facePosition.x * scale;
+    //     const destY = height * 0.45 - (facePosition.y - faceSize / 2) * scale;
 
-        // Dessiner l'image
-        ctx.drawImage(
-            image,
-            destX, destY,
-            image.width * scale, image.height * scale
-        );
+    //     // Dessiner l'image
+    //     ctx.drawImage(
+    //         image,
+    //         destX, destY,
+    //         image.width * scale, image.height * scale
+    //     );
 
-        // Convertir le canvas en dataURL
-        const dataUrl = tempCanvas.toDataURL('image/jpeg', 0.95);
-        setResultImage(dataUrl);
-    };
+    //     // Convertir le canvas en dataURL
+    //     const dataUrl = tempCanvas.toDataURL('image/jpeg', 0.95);
+    //     setResultImage(dataUrl);
+    // };
 
     // Téléchargement de l'image générée
     const downloadImage = () => {
