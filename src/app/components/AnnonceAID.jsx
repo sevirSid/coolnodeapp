@@ -60,24 +60,44 @@ const AnnonceAID = () => {
 
   
 const handleDownloadPDF = () => {
-    const input = annonceRef.current;
-    if (!input) return;
-
-    html2canvas(input, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4"
-      });
-
-      const imgWidth = 210; // Largeur A4 en mm
-      const imgHeight = (canvas.height * imgWidth) / canvas.width; // Garder les proportions
-
-      pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, imgHeight);
-      pdf.save('Annonce_Aid.pdf');
-    });
+  const input = document.getElementById('annonce-container');
+  
+  // Définir des options pour une meilleure qualité
+  const options = {
+    scale: 2, // Augmenter la résolution
+    useCORS: true, // Permettre les images provenant d'autres domaines
+    allowTaint: true, // Permettre de capturer des éléments provenant d'autres domaines
+    backgroundColor: '#ffffff' // Fond blanc pour éviter la transparence
   };
+  
+  // Afficher un message de chargement pendant la génération
+  alert('Génération du PDF en cours...');
+  
+  html2canvas(input, options).then((canvas) => {
+    const imgData = canvas.toDataURL('image/png');
+    
+    // Créer un PDF au format A4
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    
+    // Calculer les dimensions pour ajuster à la page
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    
+    // Calculer le ratio pour s'assurer que l'image s'adapte à la page
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+    const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+    
+    const imgX = (pdfWidth - imgWidth * ratio) / 2;
+    const imgY = 10; // Marge de 10mm en haut
+    
+    pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+    pdf.save('Annonce_Aid_El_Fitr.pdf');
+  }).catch(error => {
+    console.error('Erreur lors de la génération du PDF:', error);
+    alert('Une erreur est survenue lors de la génération du PDF. Veuillez réessayer.');
+  });
+};
 
   // Style inline pour simuler le CSS
   const styles = {
