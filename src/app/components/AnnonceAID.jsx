@@ -2,6 +2,9 @@
 
 import React, { useState, useRef } from 'react';
 import { Download, Edit2, Upload } from 'lucide-react';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 
 const AnnonceAID = () => {
   // États pour les textes modifiables
@@ -53,11 +56,15 @@ const AnnonceAID = () => {
     }
   };
 
-  const handleDownloadPDF = () => {
-    // Simulation du téléchargement du PDF
-    alert("Téléchargement du PDF en cours...");
-    // Ici, vous ajouteriez la logique de génération de PDF
-  };
+  
+const handleDownloadPDF = () => {
+  const input = document.getElementById('annonce-container');
+  html2canvas(input).then((canvas) => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF();
+    pdf.addImage(imgData, 'PNG', 10, 10, 180, 0);
+    pdf.save('Annonce_Aid.pdf');
+  });
 
   // Style inline pour simuler le CSS
   const styles = {
@@ -221,7 +228,7 @@ const AnnonceAID = () => {
   };
 
   return (
-    <div style={styles.annonceContainer}>
+    <div id="annonce-container" style={styles.annonceContainer}>
       {/* Logo avec upload d'image */}
       <div style={styles.logoContainer} onClick={handleImageClick}>
         {imagePreview ? (
