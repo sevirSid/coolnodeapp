@@ -1,5 +1,5 @@
-import PassportPhotoGenerator from './components/PassportPhotoGenerator';
+import AnnonceAID from './components/AnnonceAID';
 
 export default function Home() {
-    return <PassportPhotoGenerator />;
+    return <AnnonceAID />;
 }
