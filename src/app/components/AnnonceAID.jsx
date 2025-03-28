@@ -58,42 +58,52 @@ const AnnonceAID = () => {
 
   
   const handleDownloadPDF = () => {
-    // Temporairement masquer les éléments d'interface qui ne doivent pas apparaître dans le PDF
-    const uploadIcons = document.querySelectorAll('.upload-icon');
-    const editIcons = document.querySelectorAll('.edit-icon');
-    const downloadBtn = document.querySelector('.download-btn');
+    // Créer un clone du conteneur pour la manipulation avant impression
+    const printContainer = printContainerRef.current;
+    const clonedContainer = printContainer.cloneNode(true);
     
-    // Sauvegarder l'état de visibilité original
-    const uploadIconsDisplay = Array.from(uploadIcons).map(icon => icon.style.display);
-    const editIconsDisplay = Array.from(editIcons).map(icon => icon.style.display);
-    const downloadBtnDisplay = downloadBtn.style.display;
+    // Appliquer des styles temporaires au clone
+    clonedContainer.style.width = "550px";  // Définir une largeur fixe
+    clonedContainer.style.position = "absolute";
+    clonedContainer.style.left = "-9999px";
+    clonedContainer.style.top = "-9999px";
+    clonedContainer.style.padding = "20px";
     
-    // Masquer les éléments
-    uploadIcons.forEach(icon => icon.style.display = 'none');
-    editIcons.forEach(icon => icon.style.display = 'none');
-    downloadBtn.style.display = 'none';
+    // Supprimer les icônes d'édition et d'upload du clone
+    const uploadIcons = clonedContainer.querySelectorAll('.upload-icon');
+    const editIcons = clonedContainer.querySelectorAll('.edit-icon');
     
-    const input = printContainerRef.current;
+    uploadIcons.forEach(icon => icon.remove());
+    editIcons.forEach(icon => icon.remove());
     
-    // Options pour une meilleure qualité
+    // Ajouter temporairement le clone au document
+    document.body.appendChild(clonedContainer);
+    
+    // Configurations pour html2canvas
     const options = {
-      scale: 2,
+      scale: 2, // Échelle plus élevée pour une meilleure qualité
       useCORS: true,
       allowTaint: true,
       backgroundColor: '#ffffff',
-      // Ajouter une marge pour éviter que le contenu ne touche les bords
-      windowWidth: input.scrollWidth + 40,
-      windowHeight: input.scrollHeight + 40
+      width: clonedContainer.offsetWidth,
+      height: clonedContainer.offsetHeight
     };
     
     // Afficher un message de chargement
     alert('Génération du PDF en cours...');
     
-    html2canvas(input, options).then((canvas) => {
+    html2canvas(clonedContainer, options).then((canvas) => {
+      // Supprimer le clone après la capture
+      document.body.removeChild(clonedContainer);
+      
       const imgData = canvas.toDataURL('image/png');
       
       // Créer un PDF au format A4
-      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
       
       // Calculer les dimensions pour ajuster à la page
       const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -104,32 +114,32 @@ const AnnonceAID = () => {
       const imgHeight = canvas.height;
       const ratio = Math.min((pdfWidth - 20) / imgWidth, (pdfHeight - 20) / imgHeight);
       
+      // Centrer l'image sur la page
       const imgX = (pdfWidth - imgWidth * ratio) / 2;
       const imgY = 10;
       
       pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
       pdf.save('Annonce_Aid_El_Fitr.pdf');
-      
-      // Restaurer l'état de visibilité original
-      uploadIcons.forEach((icon, i) => icon.style.display = uploadIconsDisplay[i]);
-      editIcons.forEach((icon, i) => icon.style.display = editIconsDisplay[i]);
-      downloadBtn.style.display = downloadBtnDisplay;
     }).catch(error => {
       console.error('Erreur lors de la génération du PDF:', error);
       alert('Une erreur est survenue lors de la génération du PDF. Veuillez réessayer.');
       
-      // Assurer que les éléments sont restaurés même en cas d'erreur
-      uploadIcons.forEach((icon, i) => icon.style.display = uploadIconsDisplay[i]);
-      editIcons.forEach((icon, i) => icon.style.display = editIconsDisplay[i]);
-      downloadBtn.style.display = downloadBtnDisplay;
+      // S'assurer que le clone est supprimé en cas d'erreur
+      if (document.body.contains(clonedContainer)) {
+        document.body.removeChild(clonedContainer);
+      }
     });
   };
 
   // Style inline pour simuler le CSS
   const styles = {
-    annonceContainer: {
+    container: {
+      padding: '20px',
       maxWidth: '800px',
-      width: '95%',
+      margin: '0 auto'
+    },
+    annonceContainer: {
+      width: '100%',
       margin: '0 auto',
       padding: '30px',
       fontFamily: 'Arial, sans-serif',
@@ -138,14 +148,6 @@ const AnnonceAID = () => {
       border: '1px solid #ddd',
       borderRadius: '8px',
       boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-    },
-    printContainer: {
-      width: '100%',
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif',
-      textAlign: 'center',
-      backgroundColor: '#f8f8f8',
-      borderRadius: '8px'
     },
     logoContainer: {
       position: 'relative',
@@ -225,23 +227,23 @@ const AnnonceAID = () => {
     },
     h1: {
       color: '#2c3e50',
-      margin: '10px 0',
+      margin: '20px 0',
       fontSize: '28px'
     },
     h2: {
       color: '#16a085',
-      margin: '10px 0 20px',
+      margin: '20px 0 25px',
       fontSize: '24px'
     },
     info: {
       fontSize: '18px',
-      margin: '20px 0',
+      margin: '25px 0',
       color: '#333'
     },
     programme: {
       width: '100%',
       borderCollapse: 'collapse',
-      margin: '25px 0',
+      margin: '30px 0',
       fontSize: '16px',
       textAlign: 'center'
     },
@@ -252,7 +254,7 @@ const AnnonceAID = () => {
       border: '1px solid #ddd'
     },
     td: {
-      padding: '10px',
+      padding: '12px',
       border: '1px solid #ddd'
     },
     trEven: {
@@ -262,7 +264,7 @@ const AnnonceAID = () => {
       backgroundColor: '#fff3cd',
       color: '#856404',
       padding: '15px',
-      margin: '20px 0',
+      margin: '25px 0',
       borderRadius: '5px',
       border: '1px solid #ffeeba'
     },
@@ -270,7 +272,8 @@ const AnnonceAID = () => {
       fontSize: '14px',
       color: '#6c757d',
       fontStyle: 'italic',
-      marginTop: '20px'
+      marginTop: '20px',
+      paddingBottom: '10px'
     },
     downloadBtn: {
       display: 'flex',
@@ -290,9 +293,9 @@ const AnnonceAID = () => {
   };
 
   return (
-    <div style={styles.annonceContainer}>
+    <div style={styles.container}>
       {/* Conteneur pour le contenu à imprimer */}
-      <div ref={printContainerRef} style={styles.printContainer}>
+      <div ref={printContainerRef} style={styles.annonceContainer}>
         {/* Logo avec upload d'image */}
         <div style={styles.logoContainer} onClick={handleImageClick}>
           {imagePreview ? (
@@ -412,7 +415,6 @@ const AnnonceAID = () => {
       
       {/* Bouton de téléchargement - en dehors du conteneur d'impression */}
       <button 
-        className="download-btn"
         style={styles.downloadBtn} 
         onClick={handleDownloadPDF}
       >
