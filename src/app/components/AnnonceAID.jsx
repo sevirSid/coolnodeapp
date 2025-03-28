@@ -10,7 +10,7 @@ const AnnonceAID = () => {
   // États pour les textes modifiables
   const [title, setTitle] = useState("LA PRIÈRE DE L'AÏD EL FITR");
   const [subtitle, setSubtitle] = useState("صلاة عيد الفطر");
-  const [info, setInfo] = useState("À partir de 7h30 - Parc des expositions NORON");
+  const [info, setInfo] = useState("À partir de 7h30 - A la mosquée de Niort");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingSubtitle, setIsEditingSubtitle] = useState(false);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
