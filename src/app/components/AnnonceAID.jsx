@@ -326,22 +326,22 @@ const handleDownloadPDF = () => {
             <td style={styles.td}>7:30</td>
           </tr>
           <tr style={styles.trEven}>
-            <td style={styles.td}>8h20</td>
+            <td style={styles.td}>8h00</td>
             <td style={styles.td}>Sermon en Français</td>
             <td style={styles.td}>الخطبة بالفرنسية</td>
-            <td style={styles.td}>8:20</td>
+            <td style={styles.td}>8:00</td>
           </tr>
           <tr>
-            <td style={styles.td}>8h30</td>
+            <td style={styles.td}>8h15</td>
             <td style={styles.td}>Prière de l'Aïd</td>
             <td style={styles.td}>صلاة العيد</td>
-            <td style={styles.td}>8:30</td>
+            <td style={styles.td}>8:15</td>
           </tr>
           <tr style={styles.trEven}>
-            <td style={styles.td}>8h40</td>
+            <td style={styles.td}>8h30</td>
             <td style={styles.td}>Sermon en Arabe</td>
             <td style={styles.td}>الخطبة بالعربية</td>
-            <td style={styles.td}>8:40</td>
+            <td style={styles.td}>8:30</td>
           </tr>
         </tbody>
       </table>
