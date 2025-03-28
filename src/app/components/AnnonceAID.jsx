@@ -10,10 +10,12 @@ const AnnonceAID = () => {
   const [title, setTitle] = useState("LA PRIÈRE DE L'AÏD EL FITR");
   const [subtitle, setSubtitle] = useState("صلاة عيد الفطر");
   const [info, setInfo] = useState("À partir de 7h30 - A la mosquée de Niort");
+  const [infoArabic, setInfoArabic] = useState("ابتداءً من الساعة ٧:٣٠ - في مسجد نيور");
   const [address, setAddress] = useState("48 bis rue Henri Sellier, 79000 NIORT, France");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingSubtitle, setIsEditingSubtitle] = useState(false);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
+  const [isEditingInfoArabic, setIsEditingInfoArabic] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
   
   // État pour l'image
@@ -24,6 +26,7 @@ const AnnonceAID = () => {
   const handleTitleEdit = () => setIsEditingTitle(true);
   const handleSubtitleEdit = () => setIsEditingSubtitle(true);
   const handleInfoEdit = () => setIsEditingInfo(true);
+  const handleInfoArabicEdit = () => setIsEditingInfoArabic(true);
   const handleAddressEdit = () => setIsEditingAddress(true);
   
   const handleTitleSave = (e) => {
@@ -41,6 +44,12 @@ const AnnonceAID = () => {
   const handleInfoSave = (e) => {
     if (e.key === 'Enter') {
       setIsEditingInfo(false);
+    }
+  };
+
+  const handleInfoArabicSave = (e) => {
+    if (e.key === 'Enter') {
+      setIsEditingInfoArabic(false);
     }
   };
 
@@ -234,6 +243,16 @@ const AnnonceAID = () => {
       width: '100%',
       outline: 'none'
     },
+    arabicInfoInput: {
+      fontSize: '18px',
+      color: '#16a085',
+      textAlign: 'center',
+      border: 'none',
+      borderBottom: '2px solid #16a085',
+      background: 'transparent',
+      width: '100%',
+      outline: 'none'
+    },
     addressInput: {
       fontSize: '16px',
       color: '#555',
@@ -249,27 +268,31 @@ const AnnonceAID = () => {
       margin: '20px 0',
       fontSize: '28px'
     },
-    subtitleSection: {
-      margin: '35px 0',
-      position: 'relative'
-    },
     h2: {
       color: '#16a085',
+      margin: '20px 0 15px',
       fontSize: '24px',
-      display: 'inline-block',
-      marginRight: '15px'
+      display: 'block',
+      width: '100%'
     },
     info: {
       fontSize: '18px',
-      display: 'inline-block',
+      margin: '15px 0',
       color: '#333',
-      marginLeft: '15px'
+      display: 'block'
+    },
+    arabicInfo: {
+      fontSize: '18px',
+      margin: '15px 0 20px',
+      color: '#16a085',
+      display: 'block',
+      direction: 'rtl'
     },
     addressContainer: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: '20px 0 35px'
+      margin: '25px 0 35px'
     },
     addressIcon: {
       color: '#2c3e50',
@@ -348,7 +371,7 @@ const AnnonceAID = () => {
           </div>
         </div>
 
-        {/* Titre modifiable */}
+        {/* Titre français modifiable */}
         <div style={styles.titleContainer} onClick={handleTitleEdit}>
           {isEditingTitle ? (
             <input
@@ -368,47 +391,65 @@ const AnnonceAID = () => {
           )}
         </div>
 
-        {/* Section contenant le sous-titre arabe et les infos d'horaire */}
-        <div style={styles.subtitleSection}>
-          {/* Sous-titre modifiable */}
-          <div style={{...styles.titleContainer, verticalAlign: 'middle'}} onClick={handleSubtitleEdit}>
-            {isEditingSubtitle ? (
-              <input
-                type="text"
-                value={subtitle}
-                onChange={(e) => setSubtitle(e.target.value)}
-                onKeyDown={handleSubtitleSave}
-                onBlur={() => setIsEditingSubtitle(false)}
-                style={styles.subtitleInput}
-                autoFocus
-              />
-            ) : (
-              <h2 style={styles.h2}>
-                {subtitle}
-                <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
-              </h2>
-            )}
-          </div>
+        {/* Titre arabe modifiable */}
+        <div style={styles.titleContainer} onClick={handleSubtitleEdit}>
+          {isEditingSubtitle ? (
+            <input
+              type="text"
+              value={subtitle}
+              onChange={(e) => setSubtitle(e.target.value)}
+              onKeyDown={handleSubtitleSave}
+              onBlur={() => setIsEditingSubtitle(false)}
+              style={styles.subtitleInput}
+              autoFocus
+            />
+          ) : (
+            <h2 style={styles.h2}>
+              {subtitle}
+              <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
+            </h2>
+          )}
+        </div>
 
-          {/* Info modifiable */}
-          <div style={{...styles.titleContainer, verticalAlign: 'middle'}} onClick={handleInfoEdit}>
-            {isEditingInfo ? (
-              <input
-                type="text"
-                value={info}
-                onChange={(e) => setInfo(e.target.value)}
-                onKeyDown={handleInfoSave}
-                onBlur={() => setIsEditingInfo(false)}
-                style={styles.infoInput}
-                autoFocus
-              />
-            ) : (
-              <p style={styles.info}>
-                <span dangerouslySetInnerHTML={{ __html: info.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-                <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
-              </p>
-            )}
-          </div>
+        {/* Info française modifiable */}
+        <div style={styles.titleContainer} onClick={handleInfoEdit}>
+          {isEditingInfo ? (
+            <input
+              type="text"
+              value={info}
+              onChange={(e) => setInfo(e.target.value)}
+              onKeyDown={handleInfoSave}
+              onBlur={() => setIsEditingInfo(false)}
+              style={styles.infoInput}
+              autoFocus
+            />
+          ) : (
+            <p style={styles.info}>
+              <span dangerouslySetInnerHTML={{ __html: info.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+              <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
+            </p>
+          )}
+        </div>
+        
+        {/* Info arabe modifiable */}
+        <div style={styles.titleContainer} onClick={handleInfoArabicEdit}>
+          {isEditingInfoArabic ? (
+            <input
+              type="text"
+              value={infoArabic}
+              onChange={(e) => setInfoArabic(e.target.value)}
+              onKeyDown={handleInfoArabicSave}
+              onBlur={() => setIsEditingInfoArabic(false)}
+              style={styles.arabicInfoInput}
+              autoFocus
+              dir="rtl"
+            />
+          ) : (
+            <p style={styles.arabicInfo}>
+              <span dangerouslySetInnerHTML={{ __html: infoArabic }} />
+              <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
+            </p>
+          )}
         </div>
         
         {/* Adresse modifiable avec icône */}
