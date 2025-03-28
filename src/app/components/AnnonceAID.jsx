@@ -65,6 +65,7 @@ const handleDownloadPDF = () => {
     pdf.addImage(imgData, 'PNG', 10, 10, 180, 0);
     pdf.save('Annonce_Aid.pdf');
   });
+  };
 
   // Style inline pour simuler le CSS
   const styles = {
