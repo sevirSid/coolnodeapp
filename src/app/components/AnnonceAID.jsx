@@ -270,14 +270,20 @@ const AnnonceAID = () => {
     },
     h2: {
       color: '#16a085',
-      margin: '20px 0 15px',
+      margin: '30px 0 0', // Marge supérieure augmentée, pas de marge inférieure
       fontSize: '24px',
-      display: 'block',
-      width: '100%'
+      display: 'block'
+    },
+    clearBoth: {
+      clear: 'both',
+      width: '100%',
+      height: '15px',
+      display: 'block' // Force un saut de ligne
     },
     info: {
       fontSize: '18px',
-      margin: '15px 0',
+      margin: '30px 0 0', // Marge supérieure augmentée
+      padding: '0',
       color: '#333',
       display: 'block'
     },
@@ -285,14 +291,15 @@ const AnnonceAID = () => {
       fontSize: '18px',
       margin: '15px 0 20px',
       color: '#16a085',
-      display: 'block',
+      display: 'block', 
+      textAlign: 'center',
       direction: 'rtl'
     },
     addressContainer: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: '25px 0 35px'
+      margin: '30px 0 35px'
     },
     addressIcon: {
       color: '#2c3e50',
@@ -391,65 +398,77 @@ const AnnonceAID = () => {
           )}
         </div>
 
-        {/* Titre arabe modifiable */}
-        <div style={styles.titleContainer} onClick={handleSubtitleEdit}>
-          {isEditingSubtitle ? (
-            <input
-              type="text"
-              value={subtitle}
-              onChange={(e) => setSubtitle(e.target.value)}
-              onKeyDown={handleSubtitleSave}
-              onBlur={() => setIsEditingSubtitle(false)}
-              style={styles.subtitleInput}
-              autoFocus
-            />
-          ) : (
-            <h2 style={styles.h2}>
-              {subtitle}
-              <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
-            </h2>
-          )}
-        </div>
-
-        {/* Info française modifiable */}
-        <div style={styles.titleContainer} onClick={handleInfoEdit}>
-          {isEditingInfo ? (
-            <input
-              type="text"
-              value={info}
-              onChange={(e) => setInfo(e.target.value)}
-              onKeyDown={handleInfoSave}
-              onBlur={() => setIsEditingInfo(false)}
-              style={styles.infoInput}
-              autoFocus
-            />
-          ) : (
-            <p style={styles.info}>
-              <span dangerouslySetInnerHTML={{ __html: info.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-              <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
-            </p>
-          )}
+        {/* Titre arabe modifiable - avec des div pour forcer le saut de ligne */}
+        <div style={{display: 'block', width: '100%'}}>
+          <div style={styles.titleContainer} onClick={handleSubtitleEdit}>
+            {isEditingSubtitle ? (
+              <input
+                type="text"
+                value={subtitle}
+                onChange={(e) => setSubtitle(e.target.value)}
+                onKeyDown={handleSubtitleSave}
+                onBlur={() => setIsEditingSubtitle(false)}
+                style={styles.subtitleInput}
+                autoFocus
+              />
+            ) : (
+              <h2 style={styles.h2}>
+                {subtitle}
+                <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
+              </h2>
+            )}
+          </div>
         </div>
         
+        {/* Séparateur invisible qui force un saut de ligne */}
+        <div style={styles.clearBoth}></div>
+
+        {/* Info française modifiable */}
+        <div style={{display: 'block', width: '100%'}}>
+          <div style={styles.titleContainer} onClick={handleInfoEdit}>
+            {isEditingInfo ? (
+              <input
+                type="text"
+                value={info}
+                onChange={(e) => setInfo(e.target.value)}
+                onKeyDown={handleInfoSave}
+                onBlur={() => setIsEditingInfo(false)}
+                style={styles.infoInput}
+                autoFocus
+              />
+            ) : (
+              <p style={styles.info}>
+                <span dangerouslySetInnerHTML={{ __html: info.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
+              </p>
+            )}
+          </div>
+        </div>
+        
+        {/* Séparateur invisible qui force un saut de ligne */}
+        <div style={styles.clearBoth}></div>
+        
         {/* Info arabe modifiable */}
-        <div style={styles.titleContainer} onClick={handleInfoArabicEdit}>
-          {isEditingInfoArabic ? (
-            <input
-              type="text"
-              value={infoArabic}
-              onChange={(e) => setInfoArabic(e.target.value)}
-              onKeyDown={handleInfoArabicSave}
-              onBlur={() => setIsEditingInfoArabic(false)}
-              style={styles.arabicInfoInput}
-              autoFocus
-              dir="rtl"
-            />
-          ) : (
-            <p style={styles.arabicInfo}>
-              <span dangerouslySetInnerHTML={{ __html: infoArabic }} />
-              <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
-            </p>
-          )}
+        <div style={{display: 'block', width: '100%', textAlign: 'center'}}>
+          <div style={{...styles.titleContainer, display: 'inline-block'}} onClick={handleInfoArabicEdit}>
+            {isEditingInfoArabic ? (
+              <input
+                type="text"
+                value={infoArabic}
+                onChange={(e) => setInfoArabic(e.target.value)}
+                onKeyDown={handleInfoArabicSave}
+                onBlur={() => setIsEditingInfoArabic(false)}
+                style={styles.arabicInfoInput}
+                autoFocus
+                dir="rtl"
+              />
+            ) : (
+              <p style={styles.arabicInfo}>
+                <span dangerouslySetInnerHTML={{ __html: infoArabic }} />
+                <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
+              </p>
+            )}
+          </div>
         </div>
         
         {/* Adresse modifiable avec icône */}
