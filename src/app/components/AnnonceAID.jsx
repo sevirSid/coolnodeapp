@@ -18,6 +18,8 @@ const AnnonceAID = () => {
   // État pour l'image
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
+  
+  const annonceRef = useRef(null);
 
   const handleTitleEdit = () => setIsEditingTitle(true);
   const handleSubtitleEdit = () => setIsEditingSubtitle(true);
@@ -58,13 +60,23 @@ const AnnonceAID = () => {
 
   
 const handleDownloadPDF = () => {
-  const input = document.getElementById('annonce-container');
-  html2canvas(input).then((canvas) => {
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF();
-    pdf.addImage(imgData, 'PNG', 10, 10, 180, 0);
-    pdf.save('Annonce_Aid.pdf');
-  });
+    const input = annonceRef.current;
+    if (!input) return;
+
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4"
+      });
+
+      const imgWidth = 210; // Largeur A4 en mm
+      const imgHeight = (canvas.height * imgWidth) / canvas.width; // Garder les proportions
+
+      pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, imgHeight);
+      pdf.save('Annonce_Aid.pdf');
+    });
   };
 
   // Style inline pour simuler le CSS
