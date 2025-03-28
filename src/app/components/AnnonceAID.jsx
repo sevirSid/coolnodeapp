@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useRef } from 'react';
-import { Download, Edit2, Upload } from 'lucide-react';
+import { Download, Edit2, Upload, MapPin } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -249,22 +249,34 @@ const AnnonceAID = () => {
       margin: '20px 0',
       fontSize: '28px'
     },
+    subtitleSection: {
+      margin: '35px 0',
+      position: 'relative'
+    },
     h2: {
       color: '#16a085',
-      margin: '20px 0',
       fontSize: '24px',
-      display: 'block',
-      width: '100%'
+      display: 'inline-block',
+      marginRight: '15px'
     },
     info: {
       fontSize: '18px',
-      margin: '25px 0 15px',
-      color: '#333'
+      display: 'inline-block',
+      color: '#333',
+      marginLeft: '15px'
+    },
+    addressContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: '20px 0 35px'
+    },
+    addressIcon: {
+      color: '#2c3e50',
+      marginRight: '8px'
     },
     address: {
       fontSize: '16px',
-      marginTop: '5px',
-      marginBottom: '25px',
       color: '#555',
       fontStyle: 'normal'
     },
@@ -356,64 +368,70 @@ const AnnonceAID = () => {
           )}
         </div>
 
-        {/* Sous-titre modifiable */}
-        <div style={styles.titleContainer} onClick={handleSubtitleEdit}>
-          {isEditingSubtitle ? (
-            <input
-              type="text"
-              value={subtitle}
-              onChange={(e) => setSubtitle(e.target.value)}
-              onKeyDown={handleSubtitleSave}
-              onBlur={() => setIsEditingSubtitle(false)}
-              style={styles.subtitleInput}
-              autoFocus
-            />
-          ) : (
-            <h2 style={styles.h2}>
-              {subtitle}
-              <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
-            </h2>
-          )}
-        </div>
+        {/* Section contenant le sous-titre arabe et les infos d'horaire */}
+        <div style={styles.subtitleSection}>
+          {/* Sous-titre modifiable */}
+          <div style={{...styles.titleContainer, verticalAlign: 'middle'}} onClick={handleSubtitleEdit}>
+            {isEditingSubtitle ? (
+              <input
+                type="text"
+                value={subtitle}
+                onChange={(e) => setSubtitle(e.target.value)}
+                onKeyDown={handleSubtitleSave}
+                onBlur={() => setIsEditingSubtitle(false)}
+                style={styles.subtitleInput}
+                autoFocus
+              />
+            ) : (
+              <h2 style={styles.h2}>
+                {subtitle}
+                <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
+              </h2>
+            )}
+          </div>
 
-        {/* Info modifiable */}
-        <div style={styles.titleContainer} onClick={handleInfoEdit}>
-          {isEditingInfo ? (
-            <input
-              type="text"
-              value={info}
-              onChange={(e) => setInfo(e.target.value)}
-              onKeyDown={handleInfoSave}
-              onBlur={() => setIsEditingInfo(false)}
-              style={styles.infoInput}
-              autoFocus
-            />
-          ) : (
-            <p style={styles.info}>
-              <span dangerouslySetInnerHTML={{ __html: info.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-              <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
-            </p>
-          )}
+          {/* Info modifiable */}
+          <div style={{...styles.titleContainer, verticalAlign: 'middle'}} onClick={handleInfoEdit}>
+            {isEditingInfo ? (
+              <input
+                type="text"
+                value={info}
+                onChange={(e) => setInfo(e.target.value)}
+                onKeyDown={handleInfoSave}
+                onBlur={() => setIsEditingInfo(false)}
+                style={styles.infoInput}
+                autoFocus
+              />
+            ) : (
+              <p style={styles.info}>
+                <span dangerouslySetInnerHTML={{ __html: info.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
+              </p>
+            )}
+          </div>
         </div>
         
-        {/* Adresse modifiable */}
-        <div style={styles.titleContainer} onClick={handleAddressEdit}>
-          {isEditingAddress ? (
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              onKeyDown={handleAddressSave}
-              onBlur={() => setIsEditingAddress(false)}
-              style={styles.addressInput}
-              autoFocus
-            />
-          ) : (
-            <address style={styles.address}>
-              {address}
-              <Edit2 size={16} className="edit-icon" style={{...styles.editIcon, top: '50%'}} />
-            </address>
-          )}
+        {/* Adresse modifiable avec icône */}
+        <div style={styles.addressContainer}>
+          <MapPin size={20} style={styles.addressIcon} className="address-icon" />
+          <div style={styles.titleContainer} onClick={handleAddressEdit}>
+            {isEditingAddress ? (
+              <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                onKeyDown={handleAddressSave}
+                onBlur={() => setIsEditingAddress(false)}
+                style={styles.addressInput}
+                autoFocus
+              />
+            ) : (
+              <address style={styles.address}>
+                {address}
+                <Edit2 size={16} className="edit-icon" style={{...styles.editIcon, top: '50%'}} />
+              </address>
+            )}
+          </div>
         </div>
 
         <table style={styles.programme}>
@@ -455,7 +473,7 @@ const AnnonceAID = () => {
 
         <div style={styles.important}>
           <p>⚠️ <strong>Faire vos ablutions à la maison</strong></p>
-          <p>⚠️ <strong>Ramener votre propre tapis de prière</strong></p>
+          <p>⚠️ <strong>القيام بالوضوء في المنزل</strong></p>
         </div>
 
         <p style={styles.note}>* Le jour de l'Aïd el-Fitr sera le dimanche 30 mars ou 31 mars</p>
