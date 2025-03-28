@@ -10,9 +10,11 @@ const AnnonceAID = () => {
   const [title, setTitle] = useState("LA PRIÈRE DE L'AÏD EL FITR");
   const [subtitle, setSubtitle] = useState("صلاة عيد الفطر");
   const [info, setInfo] = useState("À partir de 7h30 - A la mosquée de Niort");
+  const [address, setAddress] = useState("48 bis rue Henri Sellier, 79000 NIORT, France");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingSubtitle, setIsEditingSubtitle] = useState(false);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
+  const [isEditingAddress, setIsEditingAddress] = useState(false);
   
   // État pour l'image
   const [imagePreview, setImagePreview] = useState(null);
@@ -22,6 +24,7 @@ const AnnonceAID = () => {
   const handleTitleEdit = () => setIsEditingTitle(true);
   const handleSubtitleEdit = () => setIsEditingSubtitle(true);
   const handleInfoEdit = () => setIsEditingInfo(true);
+  const handleAddressEdit = () => setIsEditingAddress(true);
   
   const handleTitleSave = (e) => {
     if (e.key === 'Enter') {
@@ -38,6 +41,12 @@ const AnnonceAID = () => {
   const handleInfoSave = (e) => {
     if (e.key === 'Enter') {
       setIsEditingInfo(false);
+    }
+  };
+
+  const handleAddressSave = (e) => {
+    if (e.key === 'Enter') {
+      setIsEditingAddress(false);
     }
   };
 
@@ -225,6 +234,16 @@ const AnnonceAID = () => {
       width: '100%',
       outline: 'none'
     },
+    addressInput: {
+      fontSize: '16px',
+      color: '#555',
+      textAlign: 'center',
+      border: 'none',
+      borderBottom: '2px solid #16a085',
+      background: 'transparent',
+      width: '100%',
+      outline: 'none'
+    },
     h1: {
       color: '#2c3e50',
       margin: '20px 0',
@@ -232,13 +251,22 @@ const AnnonceAID = () => {
     },
     h2: {
       color: '#16a085',
-      margin: '20px 0 25px',
-      fontSize: '24px'
+      margin: '20px 0',
+      fontSize: '24px',
+      display: 'block',
+      width: '100%'
     },
     info: {
       fontSize: '18px',
-      margin: '25px 0',
+      margin: '25px 0 15px',
       color: '#333'
+    },
+    address: {
+      fontSize: '16px',
+      marginTop: '5px',
+      marginBottom: '25px',
+      color: '#555',
+      fontStyle: 'normal'
     },
     programme: {
       width: '100%',
@@ -365,6 +393,26 @@ const AnnonceAID = () => {
               <span dangerouslySetInnerHTML={{ __html: info.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
               <Edit2 size={16} className="edit-icon" style={styles.editIcon} />
             </p>
+          )}
+        </div>
+        
+        {/* Adresse modifiable */}
+        <div style={styles.titleContainer} onClick={handleAddressEdit}>
+          {isEditingAddress ? (
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              onKeyDown={handleAddressSave}
+              onBlur={() => setIsEditingAddress(false)}
+              style={styles.addressInput}
+              autoFocus
+            />
+          ) : (
+            <address style={styles.address}>
+              {address}
+              <Edit2 size={16} className="edit-icon" style={{...styles.editIcon, top: '50%'}} />
+            </address>
           )}
         </div>
 
