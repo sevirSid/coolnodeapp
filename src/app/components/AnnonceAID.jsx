@@ -2,8 +2,8 @@
 
 import React, { useState, useRef } from 'react';
 import { Download, Edit2, Upload } from 'lucide-react';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import {jsPDF} from 'jspdf';
+import {html2canvas} from 'html2canvas';
 
 
 const AnnonceAID = () => {
