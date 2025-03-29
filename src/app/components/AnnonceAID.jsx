@@ -372,16 +372,15 @@ const AnnonceAID = () => {
       <div ref={printContainerRef} style={styles.annonceContainer}>
         {/* Logo avec upload d'image */}
         <div style={styles.logoContainer} onClick={handleImageClick}>
-          {imagePreview ? (
-            <img src={imagePreview} alt="Logo mosquée" style={styles.logo} />
-          ) : (         
-<img src="/IMG_4552.jpeg" alt="Logo mosquée" style={styles.logo} />
+  {imagePreview ? (
+    <img src={imagePreview} alt="Logo mosquée" style={styles.logo} />
+  ) : (         
+    <img src="/IMG_4552.jpeg" alt="Logo mosquée" style={styles.logo} />
   )}
-          )}
-          <div className="upload-icon" style={styles.uploadIcon}>
-            <Upload size={16} />
-          </div>
-        </div>
+  <div className="upload-icon" style={styles.uploadIcon}>
+    <Upload size={16} />
+  </div>
+</div>
 
         {/* Titre français modifiable */}
         <div style={styles.titleContainer} onClick={handleTitleEdit}>
