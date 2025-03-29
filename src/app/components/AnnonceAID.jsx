@@ -5,6 +5,8 @@ import { Download, Edit2, Upload, MapPin } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
+import defaultLogo from '../IMG_4552.jpeg'; // Chemin vers votre image par défaut
+
 const AnnonceAID = () => {
   // États pour les textes modifiables
   const [title, setTitle] = useState("LA PRIÈRE DE L'AÏD EL FITR");
@@ -370,8 +372,8 @@ const AnnonceAID = () => {
         <div style={styles.logoContainer} onClick={handleImageClick}>
           {imagePreview ? (
             <img src={imagePreview} alt="Logo mosquée" style={styles.logo} />
-          ) : (
-            <div style={styles.logo}>Logo Mosquée Niort</div>
+          ) : (         
+               <img src={defaultLogo} alt="Logo mosquée" style={styles.logo} />
           )}
           <div className="upload-icon" style={styles.uploadIcon}>
             <Upload size={16} />
