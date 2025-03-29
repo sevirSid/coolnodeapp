@@ -596,9 +596,10 @@ export default function MosqueePage() {
               <p className="text-gray-400 mb-2">
                 Abonnez-vous à notre newsletter pour recevoir les dernières informations et annonces de la mosquée.
               </p>
-              <form className="flex mt-3">
+              <form action="https://formsubmit.co/sevirsid@gmail.com" className="flex mt-3" method="POST">
                 <input
                   type="email"
+                  required
                   placeholder="Votre email"
                   className="px-3 py-2 bg-gray-700 text-white rounded-l focus:outline-none flex-grow"
                 />
