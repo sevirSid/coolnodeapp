@@ -3,8 +3,9 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import defaultLogo from '/IMG_4552.jpeg'; // Chemin vers votre image par défaut
-import mosqueeImage from '/IMG_4564.jpeg'; // Chemin vers votre image par défaut
+import Image from 'next/image';
+//import defaultLogo from '/IMG_4552.jpeg'; // Chemin vers votre image par défaut
+//import mosqueeImage from '/IMG_4564.jpeg'; // Chemin vers votre image par défaut
 
 export default function MosqueePage() {
   const [activeTab, setActiveTab] = useState('accueil');
@@ -130,7 +131,7 @@ export default function MosqueePage() {
                   </p>
                 </div>
                 <div className="md:w-1/3 bg-gray-200 rounded-lg flex items-center justify-center h-48 md:h-auto">
-                   <img src="/IMG_4552.jpeg" alt="Image de mosquée" style={styles.logo} />
+                  <Image src="/IMG_4564.jpeg" alt="Image de mosquée" />
                 </div>
               </div>
             </div>
