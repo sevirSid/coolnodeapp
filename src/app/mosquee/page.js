@@ -56,9 +56,11 @@ export default function MosqueePage() {
               <a href="tel:+33123456789" className="bg-green-600 hover:bg-green-800 px-4 py-2 rounded">
                 Appeler
               </a>
+               {activeTab === 'contact' && (
               <a href="#map" className="bg-green-600 hover:bg-green-800 px-4 py-2 rounded">
                 Nous trouver
               </a>
+              )}
             </div>
           </div>
         </div>
