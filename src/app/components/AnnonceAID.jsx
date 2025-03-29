@@ -377,7 +377,6 @@ const AnnonceAID = () => {
           ) : (         
 <img src="/IMG_4552.jpeg" alt="Logo mosquée" style={styles.logo} />
   )}
-    />
           )}
           <div className="upload-icon" style={styles.uploadIcon}>
             <Upload size={16} />
