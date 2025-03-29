@@ -380,7 +380,7 @@ export default function MosqueePage() {
                 <div className="border rounded-lg p-4">
                   <h4 className="font-medium mb-2">Virement bancaire</h4>
                   <p className="text-sm">
-                    Association Mosquée Al-Nour<br />
+                      Association Mosquée de Niort<br />
                     IBAN: FR76 1234 5678 9101 1121 3141 516<br />
                     BIC: AGRIFPPR123
                   </p>
@@ -423,7 +423,7 @@ export default function MosqueePage() {
             
             <div className="text-gray-600 text-sm border-t pt-4">
               <p>
-                Les dons à l'Association Mosquée Al-Nour sont déductibles des impôts à hauteur de 66% 
+                Les dons à l'Association Mosquée de Niort sont déductibles des impôts à hauteur de 66% 
                 dans la limite de 20% du revenu imposable. Un reçu fiscal vous sera délivré pour tout don.
               </p>
             </div>
@@ -453,7 +453,7 @@ export default function MosqueePage() {
                   
                   <p>
                     <span className="font-medium">Email :</span><br />
-                    <a href="mailto:contact@mosquee-acmn.fr" className="text-green-700 hover:underline">contact@mosquee-alnour.fr</a>
+                    <a href="mailto:contact@mosquee-acmn.fr" className="text-green-700 hover:underline">contact@mosquee-acmn.fr</a>
                   </p>
                   
                   <div>
@@ -570,7 +570,7 @@ export default function MosqueePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-lg font-medium mb-4">Mosquée Al-Nour</h3>
+              <h3 className="text-lg font-medium mb-4">Mosquée de Niort</h3>
               <p className="text-gray-400">
                 Un centre islamique au service de la communauté depuis 2005.
               </p>
