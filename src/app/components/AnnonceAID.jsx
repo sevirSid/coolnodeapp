@@ -521,10 +521,10 @@ const AnnonceAID = () => {
               <td style={styles.td}>8:00</td>
             </tr>
             <tr>
-              <td style={styles.td}>8h15</td>
+              <td style={styles.td}>8h20</td>
               <td style={styles.td}>Prière de l'Aïd</td>
               <td style={styles.td}>صلاة العيد</td>
-              <td style={styles.td}>8:15</td>
+              <td style={styles.td}>8:20</td>
             </tr>
             <tr style={styles.trEven}>
               <td style={styles.td}>8h30</td>
