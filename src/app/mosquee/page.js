@@ -488,12 +488,13 @@ export default function MosqueePage() {
               <div>
                 <h3 className="text-xl font-medium text-green-700 mb-3">Envoyez-nous un message</h3>
                 
-                <form className="space-y-4">
+                <form action="https://formsubmit.co/sevirsid@gmail.com" method="POST" className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
                     <input 
                       type="text" 
                       id="name" 
+                      name="name"
                       className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500"
                       required
                     />
@@ -504,6 +505,7 @@ export default function MosqueePage() {
                     <input 
                       type="email" 
                       id="email" 
+                      name="email"
                       className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500"
                       required
                     />
@@ -514,6 +516,7 @@ export default function MosqueePage() {
                     <input 
                       type="text" 
                       id="subject" 
+                      name="subject"
                       className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500"
                       required
                     />
@@ -523,6 +526,7 @@ export default function MosqueePage() {
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
                     <textarea 
                       id="message" 
+                      name="message"
                       rows="5" 
                       className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500"
                       required
