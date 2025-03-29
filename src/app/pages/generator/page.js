@@ -1,4 +1,4 @@
-import PassportPhotoGenerator from '@/components/PassportPhotoGenerator';
+import PassportPhotoGenerator from '@/app/components/PassportPhotoGenerator';
 
 export default function GeneratorPage() {
   return <PassportPhotoGenerator />;
