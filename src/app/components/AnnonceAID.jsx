@@ -375,12 +375,8 @@ const AnnonceAID = () => {
           {imagePreview ? (
             <img src={imagePreview} alt="Logo mosquée" style={styles.logo} />
           ) : (         
-               <Image 
-      src={defaultLogo} 
-      alt="Logo mosquée" 
-      width={120} 
-      height={120} 
-      style={{borderRadius: '50%', objectFit: 'cover'}} 
+               <img src={require('./IMG_4552.jpeg')} alt="Logo mosquée" style={styles.logo} />
+  )}
     />
           )}
           <div className="upload-icon" style={styles.uploadIcon}>
