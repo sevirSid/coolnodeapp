@@ -5,7 +5,7 @@ import { Download, Edit2, Upload, MapPin } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-import defaultLogo from '../IMG_4552.jpeg'; // Chemin vers votre image par défaut
+import defaultLogo from './IMG_4552.jpeg'; // Chemin vers votre image par défaut
 
 const AnnonceAID = () => {
   // États pour les textes modifiables
