@@ -539,16 +539,26 @@ export default function MosqueePage() {
               </div>
             </div>
             
-            <div className="mt-8" id="map">
-              <h3 className="text-xl font-medium text-green-700 mb-3">Nous trouver</h3>
-              <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500">Carte interactive sera affichée ici</span>
-              </div>
-              <p className="mt-2 text-sm text-gray-600">
-                Notre mosquée est facilement accessible par les transports en commun. 
-                Metro ligne 1,6 et 7 (arrêt pôle atlantique) et Bus 2, 21, et 22 (arrêt Bonnevay).
-              </p>
-            </div>
+           <div className="mt-8" id="map">
+  <h3 className="text-xl font-medium text-green-700 mb-3">Nous trouver</h3>
+  
+  <div className="relative w-full h-64 rounded-lg overflow-hidden">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2670.115022149591!2d-0.4861257!3d46.3148211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48072f8225493027%3A0x7b6393d9ff8924e0!2sACMN%20-%20Mosqu%C3%A9e%20de%20Niort!5e0!3m2!1sfr!2sfr!4v1711744870745!5m2!1sfr!2sfr"
+      width="100%"
+      height="100%"
+      style={{ border: 0 }}
+      allowFullScreen=""
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+
+  <p className="mt-2 text-sm text-gray-600">
+    Notre mosquée est facilement accessible par les transports en commun. 
+    Bus ligne 1, 6 et 7 (arrêt pôle atlantique) et Bus 2, 21, et 22 (arrêt Bonnevay).
+  </p>
+</div>
           </div>
         )}
       </main>
