@@ -3,8 +3,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import defaultLogo from './IMG_4552.jpeg'; // Chemin vers votre image par défaut
-import mosqueeImage from './IMG_4552.jpeg'; // Chemin vers votre image par défaut
+import defaultLogo from '/IMG_4552.jpeg'; // Chemin vers votre image par défaut
+import mosqueeImage from '/IMG_4564.jpeg'; // Chemin vers votre image par défaut
 
 export default function MosqueePage() {
   const [activeTab, setActiveTab] = useState('accueil');
