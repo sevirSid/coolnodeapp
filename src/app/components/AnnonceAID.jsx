@@ -5,6 +5,8 @@ import { Download, Edit2, Upload, MapPin } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
+import Image from 'next/image';
+
 import defaultLogo from './IMG_4552.jpeg'; // Chemin vers votre image par défaut
 
 const AnnonceAID = () => {
@@ -373,7 +375,13 @@ const AnnonceAID = () => {
           {imagePreview ? (
             <img src={imagePreview} alt="Logo mosquée" style={styles.logo} />
           ) : (         
-               <img src={defaultLogo} alt="Logo mosquée" style={styles.logo} />
+               <Image 
+      src={defaultLogo} 
+      alt="Logo mosquée" 
+      width={120} 
+      height={120} 
+      style={{borderRadius: '50%', objectFit: 'cover'}} 
+    />
           )}
           <div className="upload-icon" style={styles.uploadIcon}>
             <Upload size={16} />
