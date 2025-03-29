@@ -599,6 +599,7 @@ export default function MosqueePage() {
               <form action="https://formsubmit.co/sevirsid@gmail.com" className="flex mt-3" method="POST">
                 <input
                   type="email"
+                  name="email"
                   required
                   placeholder="Votre email"
                   className="px-3 py-2 bg-gray-700 text-white rounded-l focus:outline-none flex-grow"
