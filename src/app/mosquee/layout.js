@@ -2,7 +2,7 @@
 import { Metadata } from 'next';
 
 // Définissez l'URL complète vers votre image
-const logoUrl = ' https://brico-images.vercel.app/IMG_4552.jpeg''; // Remplacez par l'URL réelle de votre logo
+const logoUrl = 'https://brico-images.vercel.app/IMG_4552.jpeg'; // Remplacez par l'URL réelle de votre logo
 
 export const metadata = {
   title: 'Mosquée de Niort - Centre islamique et culturel',
