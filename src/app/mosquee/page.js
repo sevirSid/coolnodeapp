@@ -467,7 +467,7 @@ export default function MosqueePage() {
                 <div className="mt-6">
                   <h3 className="text-xl font-medium text-green-700 mb-3">Suivez-nous</h3>
                   <div className="flex space-x-3">
-                    <a href="#" className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white">
+                    <a href="https://www.facebook.com/share/15R4ipvV2F/?mibextid=wwXIfr" className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white">
                       f
                     </a>
                     <a href="#" className="w-10 h-10 rounded-full bg-blue-400 flex items-center justify-center text-white">
