@@ -375,7 +375,7 @@ const AnnonceAID = () => {
           {imagePreview ? (
             <img src={imagePreview} alt="Logo mosquée" style={styles.logo} />
           ) : (         
-               <img src={require('./IMG_4552.jpeg')} alt="Logo mosquée" style={styles.logo} />
+<img src="/IMG_4552.jpeg" alt="Logo mosquée" style={styles.logo} />
   )}
     />
           )}
