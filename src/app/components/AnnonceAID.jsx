@@ -13,8 +13,8 @@ const AnnonceAID = () => {
   // États pour les textes modifiables
   const [title, setTitle] = useState("LA PRIÈRE DE L'AÏD EL FITR");
   const [subtitle, setSubtitle] = useState("صلاة عيد الفطر");
-  const [info, setInfo] = useState("À partir de 7h30 - A la mosquée de Niort");
-  const [infoArabic, setInfoArabic] = useState("ابتداءً من الساعة ٧:٣٠ - في مسجد نيور");
+  const [info, setInfo] = useState("À partir de 8h30 - A la mosquée de Niort");
+  const [infoArabic, setInfoArabic] = useState("ابتداءً من الساعة ٨:٣٠ - في مسجد نيور");
   const [address, setAddress] = useState("48 bis rue Henri Sellier, 79000 NIORT, France");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingSubtitle, setIsEditingSubtitle] = useState(false);
@@ -509,28 +509,28 @@ const AnnonceAID = () => {
           </thead>
           <tbody>
             <tr>
-              <td style={styles.td}>7h30</td>
+              <td style={styles.td}>8h30</td>
               <td style={styles.td}>Tahleel et Tahmeed</td>
               <td style={styles.td}>تهليل و تحميد</td>
-              <td style={styles.td}>7:30</td>
+              <td style={styles.td}>8:30</td>
             </tr>
             <tr style={styles.trEven}>
-              <td style={styles.td}>8h00</td>
+              <td style={styles.td}>9h00</td>
               <td style={styles.td}>Sermon en Français</td>
               <td style={styles.td}>الخطبة بالفرنسية</td>
-              <td style={styles.td}>8:00</td>
+              <td style={styles.td}>9:00</td>
             </tr>
             <tr>
-              <td style={styles.td}>8h20</td>
+              <td style={styles.td}>9h20</td>
               <td style={styles.td}>Prière de l'Aïd</td>
               <td style={styles.td}>صلاة العيد</td>
-              <td style={styles.td}>8:20</td>
+              <td style={styles.td}>9:20</td>
             </tr>
             <tr style={styles.trEven}>
-              <td style={styles.td}>8h30</td>
+              <td style={styles.td}>9h30</td>
               <td style={styles.td}>Sermon en Arabe</td>
               <td style={styles.td}>الخطبة بالعربية</td>
-              <td style={styles.td}>8:30</td>
+              <td style={styles.td}>9:30</td>
             </tr>
           </tbody>
         </table>
