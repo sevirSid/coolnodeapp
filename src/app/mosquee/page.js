@@ -3,6 +3,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import defaultLogo from './IMG_4552.jpeg'; // Chemin vers votre image par défaut
+import mosqueeImage from './IMG_4552.jpeg'; // Chemin vers votre image par défaut
 
 export default function MosqueePage() {
   const [activeTab, setActiveTab] = useState('accueil');
@@ -10,11 +12,11 @@ export default function MosqueePage() {
   // Horaires de prière (exemple)
   const prayerTimes = {
     fajr: "05:30",
-    dhuhr: "12:45",
-    asr: "15:30",
-    maghrib: "19:15",
-    isha: "21:00",
-    jumuah: "13:15"
+    dhuhr: "13:18",
+    asr: "16:30",
+    maghrib: "19:25",
+    isha: "20:35",
+    jumuah: "13:20"
   };
 
   // Événements à venir (exemple)
@@ -46,7 +48,7 @@ export default function MosqueePage() {
         <div className="container mx-auto p-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left mb-4 md:mb-0">
-              <h1 className="text-3xl font-bold">Mosquée Al-Nour</h1>
+              <h1 className="text-3xl font-bold">Mosquée de Niort</h1>
               <p className="text-green-100">Centre islamique et culturel</p>
             </div>
             <div className="space-x-2">
@@ -111,11 +113,11 @@ export default function MosqueePage() {
         {activeTab === 'accueil' && (
           <div className="space-y-6">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-2xl font-semibold text-green-700 mb-4">Bienvenue à la Mosquée Al-Nour</h2>
+              <h2 className="text-2xl font-semibold text-green-700 mb-4">Bienvenue à la Mosquée de Niort</h2>
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="md:w-2/3">
                   <p className="mb-4">
-                    La Mosquée Al-Nour est un lieu de culte et de rassemblement pour tous les musulmans de la région. 
+                    La Mosquée de Niort ACMN est un lieu de culte et de rassemblement pour tous les musulmans de la région. 
                     Notre mission est de servir la communauté en offrant un espace de prière, d'éducation et de fraternité.
                   </p>
                   <p className="mb-4">
@@ -128,7 +130,7 @@ export default function MosqueePage() {
                   </p>
                 </div>
                 <div className="md:w-1/3 bg-gray-200 rounded-lg flex items-center justify-center h-48 md:h-auto">
-                  <span className="text-gray-500">Image de la mosquée</span>
+                   <img src="/IMG_4552.jpeg" alt="Image de mosquée" style={styles.logo} />
                 </div>
               </div>
             </div>
@@ -437,8 +439,8 @@ export default function MosqueePage() {
                 <div className="space-y-3">
                   <p>
                     <span className="font-medium">Adresse :</span><br />
-                    123 Rue de la Paix<br />
-                    75000 Paris, France
+                    48 bis rue Henri Sellier<br />
+                    79000 NIORT, France
                   </p>
                   
                   <p>
@@ -448,7 +450,7 @@ export default function MosqueePage() {
                   
                   <p>
                     <span className="font-medium">Email :</span><br />
-                    <a href="mailto:contact@mosquee-alnour.fr" className="text-green-700 hover:underline">contact@mosquee-alnour.fr</a>
+                    <a href="mailto:contact@mosquee-acmn.fr" className="text-green-700 hover:underline">contact@mosquee-alnour.fr</a>
                   </p>
                   
                   <div>
@@ -543,7 +545,7 @@ export default function MosqueePage() {
               </div>
               <p className="mt-2 text-sm text-gray-600">
                 Notre mosquée est facilement accessible par les transports en commun. 
-                Metro ligne 7 (arrêt Mosque) et Bus 27, 47, 83 (arrêt Centre Islamique).
+                Metro ligne 1,6 et 7 (arrêt pôle atlantique) et Bus 2, 21, et 22 (arrêt Bonnevay).
               </p>
             </div>
           </div>
@@ -560,8 +562,8 @@ export default function MosqueePage() {
                 Un centre islamique au service de la communauté depuis 2005.
               </p>
               <p className="text-gray-400 mt-2">
-                123 Rue de la Paix<br />
-                75000 Paris, France
+                48 bis rue Henri Sellier<br />
+                79000 NIORT, France
               </p>
             </div>
             
@@ -598,7 +600,7 @@ export default function MosqueePage() {
           </div>
           
           <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
-            <p>© {new Date().getFullYear()} Mosquée Al-Nour. Tous droits réservés.</p>
+            <p>© {new Date().getFullYear()} Mosquée de Niort. Tous droits réservés.</p>
             <p className="mt-2">
               <a href="#" className="hover:text-white">Mentions légales</a> | 
               <a href="#" className="hover:text-white ml-3">Politique de confidentialité</a>
