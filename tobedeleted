@@ -1,1 +1,15 @@
 
+fetch('http://localhost:8080/espacepro/initialiserDevisAvMneAOF', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(vm.decouverteMNE)
+})
+.then(response => response.json())
+.then(data => {
+  console.log("Réponse backend :", data);
+})
+.catch(error => {
+  console.error("Erreur FETCH :", error);
+});
