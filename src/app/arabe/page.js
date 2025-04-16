@@ -159,11 +159,11 @@ export default function LetterGenerator() {
     <table className="table-auto mx-auto border border-gray-300 bg-white text-xl">
       <thead>
         <tr className="bg-blue-500 text-white">
-          <th className="px-4 py-2">الحرف</th>
-          <th className="px-4 py-2">فَتْحَة</th>
-          <th className="px-4 py-2">ضَمَّة</th>
-          <th className="px-4 py-2">كَسْرَة</th>
           <th className="px-4 py-2">سُكُون</th>
+          <th className="px-4 py-2">كَسْرَة</th>
+          <th className="px-4 py-2">ضَمَّة</th>
+          <th className="px-4 py-2">فَتْحَة</th>
+          <th className="px-4 py-2">الحرف</th>
         </tr>
       </thead>
       <tbody>
