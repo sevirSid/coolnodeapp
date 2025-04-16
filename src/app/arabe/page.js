@@ -35,43 +35,58 @@ const letters = [
 ];
 
 const harakat = [
-  { name: 'Fatha', symbol: 'َ', example: 'بَ' },
-  { name: 'Damma', symbol: 'ُ', example: 'بُ' },
-  { name: 'Kasra', symbol: 'ِ', example: 'بِ' },
-  { name: 'Sukun', symbol: 'ْ', example: 'بْ' },
+  { name: "Fatha", symbol: "َ", example: "بَ" },
+  { name: "Damma", symbol: "ُ", example: "بُ" },
+  { name: "Kasra", symbol: "ِ", example: "بِ" },
+  { name: "Sukun", symbol: "ْ", example: "بْ" },
 ];
 
-
 export default function LetterGenerator() {
-  const [tab, setTab] = useState<'letters' | 'harakat'>('letters');
+  const [tab, setTab] = useState("letters");
 
-    console.log("Valeur initiale de tab:", tab);
+  console.log("Valeur initiale de tab:", tab);
   console.log("Données des lettres:", letters);
   console.log("Données des harakats:", harakat);
-  
+
+  // Vérifier si `letters` et `harakat` sont bien des tableaux
+  if (!Array.isArray(letters)) {
+    console.error("Erreur: letters n'est pas un tableau !");
+  }
+  if (!Array.isArray(harakat)) {
+    console.error("Erreur: harakat n'est pas un tableau !");
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 text-center p-6 font-sans">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">تعلم الحروف العربية والحركات</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">
+        تعلم الحروف العربية والحركات
+      </h1>
       <div className="flex justify-center mb-6">
-        <button onClick={() => 
-    {
-       console.log("Changement de tab vers 'letters'");
-    setTab('letters')
-    }}
-    className={`px-4 py-2 rounded-l bg-${tab === 'letters' ? 'blue' : 'gray'}-500 text-white`}>
+        <button
+          onClick={() => {
+            console.log("Changement de tab vers 'letters'");
+            setTab("letters");
+          }}
+          className={`px-4 py-2 rounded-l bg-${
+            tab === "letters" ? "blue" : "gray"
+          }-500 text-white`}
+        >
           الحروف
         </button>
-        <button onClick={() => 
-            {
+        <button
+          onClick={() => {
             console.log("Changement de tab vers 'harakat'");
-            setTab('harakat');
-          }} 
-className={`px-4 py-2 rounded-r bg-${tab === 'harakat' ? 'blue' : 'gray'}-500 text-white`}>
+            setTab("harakat");
+          }}
+          className={`px-4 py-2 rounded-r bg-${
+            tab === "harakat" ? "blue" : "gray"
+          }-500 text-white`}
+        >
           الحركات
         </button>
       </div>
 
-      {tab === 'letters' && (
+      {tab === "letters" && (
         <div className="overflow-x-auto">
           <table className="table-auto mx-auto border border-gray-300 bg-white text-xl">
             <thead>
@@ -83,25 +98,28 @@ className={`px-4 py-2 rounded-r bg-${tab === 'harakat' ? 'blue' : 'gray'}-500 te
                 <th className="px-4 py-2">منفصل</th>
               </tr>
             </thead>
-        <tbody>
-          {letters.map((l, idx) => {
-            console.log(`Affichage de la lettre ${l.letter} à l'index ${idx}`);
-            return (
-              <tr key={idx}>
-                <td className="border px-4 py-2 font-bold">{l.letter}</td>
-                <td className="border px-4 py-2">{l.initial}</td>
-                <td className="border px-4 py-2">{l.medial}</td>
-                <td className="border px-4 py-2">{l.final}</td>
-                <td className="border px-4 py-2">{l.isolated}</td>
-              </tr>
-            );
-          })}
-        </tbody>
+            <tbody>
+              {Array.isArray(letters) &&
+                letters.map((l, idx) => {
+                  console.log(
+                    `Affichage de la lettre ${l.letter} à l'index ${idx}`
+                  );
+                  return (
+                    <tr key={idx}>
+                      <td className="border px-4 py-2 font-bold">{l.letter}</td>
+                      <td className="border px-4 py-2">{l.initial}</td>
+                      <td className="border px-4 py-2">{l.medial}</td>
+                      <td className="border px-4 py-2">{l.final}</td>
+                      <td className="border px-4 py-2">{l.isolated}</td>
+                    </tr>
+                  );
+                })}
+            </tbody>
           </table>
         </div>
       )}
 
-      {tab === 'harakat' && (
+      {tab === "harakat" && (
         <div className="overflow-x-auto">
           <table className="table-auto mx-auto border border-gray-300 bg-white text-xl">
             <thead>
@@ -111,19 +129,19 @@ className={`px-4 py-2 rounded-r bg-${tab === 'harakat' ? 'blue' : 'gray'}-500 te
                 <th className="px-4 py-2">مثال</th>
               </tr>
             </thead>
-        <tbody>
-          {harakat.map((h, idx) => {
-            console.log(`Affichage de la haraka ${h.name} à l'index ${idx}`);
-            return (
-              <tr key={idx}>
-                <td className="border px-4 py-2">{h.name}</td>
-                <td className="border px-4 py-2">{h.symbol}</td>
-                <td className="border px-4 py-2">{h.example}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-
+            <tbody>
+              {Array.isArray(harakat) &&
+                harakat.map((h, idx) => {
+                  console.log(`Affichage de la haraka ${h.name} à l'index ${idx}`);
+                  return (
+                    <tr key={idx}>
+                      <td className="border px-4 py-2">{h.name}</td>
+                      <td className="border px-4 py-2">{h.symbol}</td>
+                      <td className="border px-4 py-2">{h.example}</td>
+                    </tr>
+                  );
+                })}
+            </tbody>
           </table>
         </div>
       )}
