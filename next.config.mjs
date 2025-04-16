@@ -10,10 +10,10 @@ const nextConfig = {
   
   // Configuration des pages statiques
   // À adapter selon vos besoins
-  experimental: {
+  //experimental: {
     // Inclut les assets statiques dans la génération
-    staticPageGenerationTimeout: 120,
-  },
+    //staticPageGenerationTimeout: 120,
+  //},
   
   // Optimisations supplémentaires
   compiler: {
