@@ -34,19 +34,13 @@ const letters = [
   { letter: 'ي', isolated: 'ي', initial: 'يـ', medial: 'ـيـ', final: 'ـي' },
 ];
 
-// const harakat = [
-//   { name: 'Fatha', symbol: 'َ', example: 'بَ' },
-//   { name: 'Damma', symbol: 'ُ', example: 'بُ' },
-//   { name: 'Kasra', symbol: 'ِ', example: 'بِ' },
-//   { name: 'Sukun', symbol: 'ْ', example: 'بْ' },
-// ];
-
 const harakat = [
-  { name: 'Fatha', symbol:'', example: 'بَ' },
-  { name: 'Damma', symbol:'', example: 'بُ' },
-  { name: 'Kasra', symbol:'', example: 'بِ' },
-  { name: 'Sukun', symbol:'', example: 'بْ' },
+  { name: 'Fatha', symbol: 'َ', example: 'بَ' },
+  { name: 'Damma', symbol: 'ُ', example: 'بُ' },
+  { name: 'Kasra', symbol: 'ِ', example: 'بِ' },
+  { name: 'Sukun', symbol: 'ْ', example: 'بْ' },
 ];
+
 
 export default function LetterGenerator() {
   const [tab, setTab] = useState<'letters' | 'harakat'>('letters');
