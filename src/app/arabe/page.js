@@ -35,9 +35,9 @@ const letters = [
 
 const harakat = [
   { name: 'Fatha', symbol: ''َ', example: 'بَ' },
-  { name: 'Damma', symbol: ''ُ', example: 'بُ' },
+  { name: 'Damma', symbol: 'ُ', example: 'بُ' },
   { name: 'Kasra', symbol: 'ِ', example: 'بِ' },
-  { name: 'Sukun', symbol: ''ْ', example: 'بْ' },
+  { name: 'Sukun', symbol: 'ْ', example: 'بْ' },
 ];
 
 export default function LetterGenerator() {
