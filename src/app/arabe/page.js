@@ -83,18 +83,20 @@ className={`px-4 py-2 rounded-r bg-${tab === 'harakat' ? 'blue' : 'gray'}-500 te
                 <th className="px-4 py-2">منفصل</th>
               </tr>
             </thead>
-            <tbody>
-              {letters.map((l, idx) => ({
-                 console.log(`Affichage de la lettre ${l.letter} à l'index ${idx}`);
-                <tr key={idx}>
-                  <td className="border px-4 py-2 font-bold">{l.letter}</td>
-                  <td className="border px-4 py-2">{l.initial}</td>
-                  <td className="border px-4 py-2">{l.medial}</td>
-                  <td className="border px-4 py-2">{l.final}</td>
-                  <td className="border px-4 py-2">{l.isolated}</td>
-                </tr>
-              );})}
-            </tbody>
+        <tbody>
+          {letters.map((l, idx) => {
+            console.log(`Affichage de la lettre ${l.letter} à l'index ${idx}`);
+            return (
+              <tr key={idx}>
+                <td className="border px-4 py-2 font-bold">{l.letter}</td>
+                <td className="border px-4 py-2">{l.initial}</td>
+                <td className="border px-4 py-2">{l.medial}</td>
+                <td className="border px-4 py-2">{l.final}</td>
+                <td className="border px-4 py-2">{l.isolated}</td>
+              </tr>
+            );
+          })}
+        </tbody>
           </table>
         </div>
       )}
@@ -109,18 +111,19 @@ className={`px-4 py-2 rounded-r bg-${tab === 'harakat' ? 'blue' : 'gray'}-500 te
                 <th className="px-4 py-2">مثال</th>
               </tr>
             </thead>
-            <tbody>
-              {harakat.map((h, idx) => ({
-                console.log(`Affichage de la haraka ${h.name} à l'index ${idx}`);
-               
-                <tr key={idx}>
-                  <td className="border px-4 py-2">{h.name}</td>
-                  <td className="border px-4 py-2">{h.symbol}</td>
-                  <td className="border px-4 py-2">{h.example}</td>
-                </tr>
-              );
-      })}
-            </tbody>
+        <tbody>
+          {harakat.map((h, idx) => {
+            console.log(`Affichage de la haraka ${h.name} à l'index ${idx}`);
+            return (
+              <tr key={idx}>
+                <td className="border px-4 py-2">{h.name}</td>
+                <td className="border px-4 py-2">{h.symbol}</td>
+                <td className="border px-4 py-2">{h.example}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+
           </table>
         </div>
       )}
