@@ -72,6 +72,7 @@ const harakatExamples = [
   { letter: 'ي', fatha: 'يَ', damma: 'يُ', kasra: 'يِ', sukun: 'يْ' },
 ];
 
+
 console.log(harakatExamples);
 
 
@@ -103,7 +104,7 @@ export default function LetterGenerator() {
           }}
           className={`px-4 py-2 rounded-l bg-${
             tab === "letters" ? "blue" : "gray"
-          }-500 text-white`}
+          }-500 text-black`}
         >
           الحروف
         </button>
@@ -114,7 +115,7 @@ export default function LetterGenerator() {
           }}
           className={`px-4 py-2 rounded-r bg-${
             tab === "harakat" ? "blue" : "gray"
-          }-500 text-white`}
+          }-500 text-black`}
         >
           الحركات
         </button>
@@ -168,11 +169,11 @@ export default function LetterGenerator() {
       <tbody>
         {harakatExamples.map((h, idx) => (
           <tr key={idx} className={idx % 2 === 0 ? "bg-gray-100" : "bg-white"}>
-            <td className="border px-4 py-2 font-bold">{h.letter}</td>
-            <td className="border px-4 py-2 text-red-500">{h.fatha}</td>
-            <td className="border px-4 py-2 text-green-500">{h.damma}</td>
-            <td className="border px-4 py-2 text-blue-500">{h.kasra}</td>
-            <td className="border px-4 py-2 text-gray-500">{h.sukun}</td>
+          <td className="border px-4 py-2 text-gray-500">{h.sukun}</td>
+          <td className="border px-4 py-2 text-blue-500">{h.kasra}</td>
+          <td className="border px-4 py-2 text-green-500">{h.damma}</td>
+          <td className="border px-4 py-2 text-red-500">{h.fatha}</td>
+           <td className="border px-4 py-2 font-bold">{h.letter}</td>
           </tr>
         ))}
       </tbody>
