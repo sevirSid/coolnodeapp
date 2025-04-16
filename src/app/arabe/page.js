@@ -179,33 +179,6 @@ export default function LetterGenerator() {
     </table>
   </div>
 )}
-
-      // {tab === "harakat" && (
-      //   <div className="overflow-x-auto">
-      //     <table className="table-auto mx-auto border border-gray-300 bg-white text-xl">
-      //       <thead>
-      //         <tr className="bg-gray-200">
-      //           <th className="px-4 py-2">الحركة</th>
-      //           <th className="px-4 py-2">الرمز</th>
-      //           <th className="px-4 py-2">مثال</th>
-      //         </tr>
-      //       </thead>
-      //       <tbody>
-      //         {Array.isArray(harakat) &&
-      //           harakat.map((h, idx) => {
-      //             console.log(`Affichage de la haraka ${h.name} à l'index ${idx}`);
-      //             return (
-      //               <tr key={idx}>
-      //                 <td className="border px-4 py-2">{h.name}</td>
-      //                 <td className="border px-4 py-2">{h.symbol}</td>
-      //                 <td className="border px-4 py-2">{h.example}</td>
-      //               </tr>
-      //             );
-      //           })}
-      //       </tbody>
-      //     </table>
-      //   </div>
-      // )}
     </div>
   );
 }
