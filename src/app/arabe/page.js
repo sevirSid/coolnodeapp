@@ -41,6 +41,40 @@ const harakat = [
   { name: "Sukun", symbol: "ْ", example: "بْ" },
 ];
 
+const harakatExamples = [
+  { letter: 'ا', fatha: 'اَ', damma: 'اُ', kasra: 'اِ', sukun: 'اْ' },
+  { letter: 'ب', fatha: 'بَ', damma: 'بُ', kasra: 'بِ', sukun: 'بْ' },
+  { letter: 'ت', fatha: 'تَ', damma: 'تُ', kasra: 'تِ', sukun: 'تْ' },
+  { letter: 'ث', fatha: 'ثَ', damma: 'ثُ', kasra: 'ثِ', sukun: 'ثْ' },
+  { letter: 'ج', fatha: 'جَ', damma: 'جُ', kasra: 'جِ', sukun: 'جْ' },
+  { letter: 'ح', fatha: 'حَ', damma: 'حُ', kasra: 'حِ', sukun: 'حْ' },
+  { letter: 'خ', fatha: 'خَ', damma: 'خُ', kasra: 'خِ', sukun: 'خْ' },
+  { letter: 'د', fatha: 'دَ', damma: 'دُ', kasra: 'دِ', sukun: 'دْ' },
+  { letter: 'ذ', fatha: 'ذَ', damma: 'ذُ', kasra: 'ذِ', sukun: 'ذْ' },
+  { letter: 'ر', fatha: 'رَ', damma: 'رُ', kasra: 'رِ', sukun: 'رْ' },
+  { letter: 'ز', fatha: 'زَ', damma: 'زُ', kasra: 'زِ', sukun: 'زْ' },
+  { letter: 'س', fatha: 'سَ', damma: 'سُ', kasra: 'سِ', sukun: 'سْ' },
+  { letter: 'ش', fatha: 'شَ', damma: 'شُ', kasra: 'شِ', sukun: 'شْ' },
+  { letter: 'ص', fatha: 'صَ', damma: 'صُ', kasra: 'صِ', sukun: 'صْ' },
+  { letter: 'ض', fatha: 'ضَ', damma: 'ضُ', kasra: 'ضِ', sukun: 'ضْ' },
+  { letter: 'ط', fatha: 'طَ', damma: 'طُ', kasra: 'طِ', sukun: 'طْ' },
+  { letter: 'ظ', fatha: 'ظَ', damma: 'ظُ', kasra: 'ظِ', sukun: 'ظْ' },
+  { letter: 'ع', fatha: 'عَ', damma: 'عُ', kasra: 'عِ', sukun: 'عْ' },
+  { letter: 'غ', fatha: 'غَ', damma: 'غُ', kasra: 'غِ', sukun: 'غْ' },
+  { letter: 'ف', fatha: 'فَ', damma: 'فُ', kasra: 'فِ', sukun: 'فْ' },
+  { letter: 'ق', fatha: 'قَ', damma: 'قُ', kasra: 'قِ', sukun: 'قْ' },
+  { letter: 'ك', fatha: 'كَ', damma: 'كُ', kasra: 'كِ', sukun: 'كْ' },
+  { letter: 'ل', fatha: 'لَ', damma: 'لُ', kasra: 'لِ', sukun: 'لْ' },
+  { letter: 'م', fatha: 'مَ', damma: 'مُ', kasra: 'مِ', sukun: 'مْ' },
+  { letter: 'ن', fatha: 'نَ', damma: 'نُ', kasra: 'نِ', sukun: 'نْ' },
+  { letter: 'ه', fatha: 'هَ', damma: 'هُ', kasra: 'هِ', sukun: 'هْ' },
+  { letter: 'و', fatha: 'وَ', damma: 'وُ', kasra: 'وِ', sukun: 'وْ' },
+  { letter: 'ي', fatha: 'يَ', damma: 'يُ', kasra: 'يِ', sukun: 'يْ' },
+];
+
+console.log(harakatExamples);
+
+
 export default function LetterGenerator() {
   const [tab, setTab] = useState("letters");
 
@@ -119,32 +153,59 @@ export default function LetterGenerator() {
         </div>
       )}
 
-      {tab === "harakat" && (
-        <div className="overflow-x-auto">
-          <table className="table-auto mx-auto border border-gray-300 bg-white text-xl">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="px-4 py-2">الحركة</th>
-                <th className="px-4 py-2">الرمز</th>
-                <th className="px-4 py-2">مثال</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Array.isArray(harakat) &&
-                harakat.map((h, idx) => {
-                  console.log(`Affichage de la haraka ${h.name} à l'index ${idx}`);
-                  return (
-                    <tr key={idx}>
-                      <td className="border px-4 py-2">{h.name}</td>
-                      <td className="border px-4 py-2">{h.symbol}</td>
-                      <td className="border px-4 py-2">{h.example}</td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </div>
-      )}
+        {tab === "harakatExamples" && (
+  <div className="overflow-x-auto">
+    <table className="table-auto mx-auto border border-gray-300 bg-white text-xl">
+      <thead>
+        <tr className="bg-blue-500 text-white">
+          <th className="px-4 py-2">الحرف</th>
+          <th className="px-4 py-2">فَتْحَة</th>
+          <th className="px-4 py-2">ضَمَّة</th>
+          <th className="px-4 py-2">كَسْرَة</th>
+          <th className="px-4 py-2">سُكُون</th>
+        </tr>
+      </thead>
+      <tbody>
+        {harakatExamples.map((h, idx) => (
+          <tr key={idx} className={idx % 2 === 0 ? "bg-gray-100" : "bg-white"}>
+            <td className="border px-4 py-2 font-bold">{h.letter}</td>
+            <td className="border px-4 py-2 text-red-500">{h.fatha}</td>
+            <td className="border px-4 py-2 text-green-500">{h.damma}</td>
+            <td className="border px-4 py-2 text-blue-500">{h.kasra}</td>
+            <td className="border px-4 py-2 text-gray-500">{h.sukun}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
+      // {tab === "harakat" && (
+      //   <div className="overflow-x-auto">
+      //     <table className="table-auto mx-auto border border-gray-300 bg-white text-xl">
+      //       <thead>
+      //         <tr className="bg-gray-200">
+      //           <th className="px-4 py-2">الحركة</th>
+      //           <th className="px-4 py-2">الرمز</th>
+      //           <th className="px-4 py-2">مثال</th>
+      //         </tr>
+      //       </thead>
+      //       <tbody>
+      //         {Array.isArray(harakat) &&
+      //           harakat.map((h, idx) => {
+      //             console.log(`Affichage de la haraka ${h.name} à l'index ${idx}`);
+      //             return (
+      //               <tr key={idx}>
+      //                 <td className="border px-4 py-2">{h.name}</td>
+      //                 <td className="border px-4 py-2">{h.symbol}</td>
+      //                 <td className="border px-4 py-2">{h.example}</td>
+      //               </tr>
+      //             );
+      //           })}
+      //       </tbody>
+      //     </table>
+      //   </div>
+      // )}
     </div>
   );
 }
