@@ -153,7 +153,7 @@ export default function LetterGenerator() {
         </div>
       )}
 
-        {tab === "harakatExamples" && (
+        {tab === "harakat" && (
   <div className="overflow-x-auto">
     <table className="table-auto mx-auto border border-gray-300 bg-white text-xl">
       <thead>
