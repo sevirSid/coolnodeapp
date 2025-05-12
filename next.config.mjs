@@ -8,13 +8,6 @@ const nextConfig = {
   // Définir le chemin de base si vous déployez dans un sous-dossier
   // basePath: '/mosquee',
   
-  // Configuration des pages statiques
-  // À adapter selon vos besoins
-  //experimental: {
-    // Inclut les assets statiques dans la génération
-    //staticPageGenerationTimeout: 120,
-  //},
-  
   // Optimisations supplémentaires
   compiler: {
     // Supprime les console.log en production
