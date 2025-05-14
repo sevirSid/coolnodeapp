@@ -1,6 +1,4 @@
-Bien sûr, je vais vous créer un script batch (pour Windows) et un script bash (pour Linux/Mac) pour organiser votre dossier de téléchargements. Voici les deux versions :
-
-## Script Batch pour Windows (.bat)
+Voici une version améliorée du script batch pour Windows avec davantage d'extensions de fichiers pour une organisation plus complète de votre dossier de téléchargements :
 
 ```batch
 @echo off
@@ -10,45 +8,73 @@ setlocal enabledelayedexpansion
 set "DOWNLOAD_DIR=%USERPROFILE%\Downloads"
 cd "%DOWNLOAD_DIR%"
 
-:: Création des dossiers principaux si nécessaires
-mkdir Documents\PDF Documents\Word Documents\Excel Documents\Presentations Documents\Texte 2>nul
-mkdir Images Images\Vectoriel 2>nul
-mkdir Audio Videos 2>nul
-mkdir Archives Programmes\Windows 2>nul
-mkdir Autres 2>nul
+echo Création des dossiers...
 
-:: Déplacer les fichiers selon leur extension
+:: Création des dossiers principaux si nécessaires
+mkdir Documents\PDF Documents\Word Documents\Excel Documents\Presentations Documents\Texte Documents\Ebooks Documents\Code 2>nul
+mkdir Images\Photos Images\Vectoriel Images\Icons 2>nul
+mkdir Audio\Music Audio\Podcasts Audio\SoundEffects 2>nul
+mkdir Videos\Movies Videos\TV Videos\Clips 2>nul
+mkdir Archives Programmes\Windows Programmes\Installers 2>nul
+mkdir Torrents 3D-Models Fonts Autres 2>nul
+
 echo Classement des fichiers en cours...
 
-:: Documents
+:: Documents - Texte et Office
 for %%f in (*.pdf) do move "%%f" "Documents\PDF\" 2>nul
-for %%f in (*.doc *.docx *.rtf *.odt) do move "%%f" "Documents\Word\" 2>nul
-for %%f in (*.xls *.xlsx *.csv) do move "%%f" "Documents\Excel\" 2>nul
-for %%f in (*.ppt *.pptx) do move "%%f" "Documents\Presentations\" 2>nul
-for %%f in (*.txt) do move "%%f" "Documents\Texte\" 2>nul
+for %%f in (*.doc *.docx *.rtf *.odt *.dot *.dotx) do move "%%f" "Documents\Word\" 2>nul
+for %%f in (*.xls *.xlsx *.xlsm *.csv *.ods *.xlt *.xltx) do move "%%f" "Documents\Excel\" 2>nul
+for %%f in (*.ppt *.pptx *.pps *.ppsx *.odp *.pot *.potx) do move "%%f" "Documents\Presentations\" 2>nul
+for %%f in (*.txt *.md *.log *.nfo) do move "%%f" "Documents\Texte\" 2>nul
+
+:: Documents - Ebooks
+for %%f in (*.epub *.mobi *.azw *.azw3 *.fb2 *.cbr *.cbz) do move "%%f" "Documents\Ebooks\" 2>nul
+
+:: Documents - Code
+for %%f in (*.html *.htm *.css *.js *.php *.py *.java *.c *.cpp *.h *.cs *.vb *.sql *.xml *.json *.yaml *.yml) do move "%%f" "Documents\Code\" 2>nul
 
 :: Images
-for %%f in (*.jpg *.jpeg *.png *.gif *.bmp *.tiff) do move "%%f" "Images\" 2>nul
-for %%f in (*.svg *.ai *.eps) do move "%%f" "Images\Vectoriel\" 2>nul
+for %%f in (*.jpg *.jpeg *.png *.gif *.bmp *.tiff *.tif *.webp *.heic *.heif *.raw *.cr2 *.nef) do move "%%f" "Images\Photos\" 2>nul
+for %%f in (*.svg *.ai *.eps *.cdr *.pdf) do move "%%f" "Images\Vectoriel\" 2>nul
+for %%f in (*.ico *.icon *.icns) do move "%%f" "Images\Icons\" 2>nul
 
-:: Audio/Vidéo
-for %%f in (*.mp3 *.wav *.flac *.aac *.ogg) do move "%%f" "Audio\" 2>nul
-for %%f in (*.mp4 *.mov *.avi *.mkv *.wmv) do move "%%f" "Videos\" 2>nul
+:: Audio
+for %%f in (*.mp3 *.m4a *.flac *.aac *.ogg *.wma *.wav *.alac *.aiff *.opus) do move "%%f" "Audio\Music\" 2>nul
+for %%f in (*.mp3 *.m4a *.m4b *.aac) do move "%%f" "Audio\Podcasts\" 2>nul
+for %%f in (*.wav *.mp3 *.ogg *.flac) do move "%%f" "Audio\SoundEffects\" 2>nul
+
+:: Vidéo
+for %%f in (*.mp4 *.mkv *.avi *.mov *.wmv *.mpg *.mpeg *.m4v *.flv *.webm *.vob *.ogv *.drc *.mts *.m2ts) do move "%%f" "Videos\Movies\" 2>nul
+for %%f in (*.mp4 *.mkv *.avi *.mov) do move "%%f" "Videos\TV\" 2>nul
+for %%f in (*.mp4 *.mov *.gif *.webm) do move "%%f" "Videos\Clips\" 2>nul
 
 :: Archives
-for %%f in (*.zip *.rar *.7z *.tar *.gz) do move "%%f" "Archives\" 2>nul
+for %%f in (*.zip *.rar *.7z *.tar *.gz *.bz2 *.xz *.tgz *.tbz2 *.iso *.dmg) do move "%%f" "Archives\" 2>nul
 
 :: Programmes
-for %%f in (*.exe *.msi *.msix) do move "%%f" "Programmes\Windows\" 2>nul
+for %%f in (*.exe *.msi *.msix *.appx) do move "%%f" "Programmes\Windows\" 2>nul
+for %%f in (*.deb *.rpm *.pkg *.apk *.appimage) do move "%%f" "Programmes\Installers\" 2>nul
+
+:: Torrents
+for %%f in (*.torrent *.magnet) do move "%%f" "Torrents\" 2>nul
+
+:: 3D Models
+for %%f in (*.obj *.stl *.fbx *.3ds *.blend *.dae *.max *.ma *.mb *.c4d *.skp) do move "%%f" "3D-Models\" 2>nul
+
+:: Fonts
+for %%f in (*.ttf *.otf *.woff *.woff2 *.eot) do move "%%f" "Fonts\" 2>nul
 
 :: Déplacer le reste dans "Autres"
+:: Exclure les fichiers critiques et le script lui-même
 for %%f in (*.*) do (
     if not "%%~xf"=="" (
         if not "%%~xf"==".ini" (
             if not "%%~xf"==".lnk" (
-                if not "%%~xf"==".bat" (
-                    if not "%%~xf"==".sh" (
-                        move "%%f" "Autres\" 2>nul
+                if not "%%~xf"==".url" (
+                    if not "%%~xf"==".bat" (
+                        if not "%%~xf"==".db" (
+                            move "%%f" "Autres\" 2>nul
+                        )
                     )
                 )
             )
@@ -56,75 +82,24 @@ for %%f in (*.*) do (
     )
 )
 
+echo.
 echo Classement terminé !
+echo Les fichiers ont été organisés dans des sous-dossiers appropriés.
+echo.
 pause
 ```
 
-## Script Bash pour Linux/Mac (.sh)
+Ce script batch amélioré pour Windows:
 
-```bash
-#!/bin/bash
+1. Crée une structure plus détaillée de dossiers et sous-dossiers
+2. Prend en charge beaucoup plus d'extensions de fichiers
+3. Organise les fichiers dans des catégories plus spécifiques (sous-dossiers pour audio, vidéo, etc.)
+4. Exclut les fichiers système et le script lui-même du déplacement
+5. Ajoute des catégories spéciales comme les ebooks, fonts, fichiers de code, torrents et modèles 3D
 
-# Définition du dossier Downloads
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # macOS
-    DOWNLOAD_DIR="$HOME/Downloads"
-else
-    # Linux
-    DOWNLOAD_DIR="$HOME/Downloads"
-fi
-
-cd "$DOWNLOAD_DIR" || exit 1
-
-# Création des dossiers principaux si nécessaires
-mkdir -p Documents/{PDF,Word,Excel,Presentations,Texte}
-mkdir -p Images/Vectoriel
-mkdir -p Audio Videos
-mkdir -p Archives Programmes
-mkdir -p Autres
-
-echo "Classement des fichiers en cours..."
-
-# Utilisation de find pour déplacer les fichiers selon leur extension
-
-# Documents
-find . -maxdepth 1 -type f -name "*.pdf" -exec mv {} Documents/PDF/ \; 2>/dev/null
-find . -maxdepth 1 -type f \( -name "*.doc" -o -name "*.docx" -o -name "*.rtf" -o -name "*.odt" \) -exec mv {} Documents/Word/ \; 2>/dev/null
-find . -maxdepth 1 -type f \( -name "*.xls" -o -name "*.xlsx" -o -name "*.csv" \) -exec mv {} Documents/Excel/ \; 2>/dev/null
-find . -maxdepth 1 -type f \( -name "*.ppt" -o -name "*.pptx" \) -exec mv {} Documents/Presentations/ \; 2>/dev/null
-find . -maxdepth 1 -type f -name "*.txt" -exec mv {} Documents/Texte/ \; 2>/dev/null
-
-# Images
-find . -maxdepth 1 -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" -o -name "*.bmp" -o -name "*.tiff" \) -exec mv {} Images/ \; 2>/dev/null
-find . -maxdepth 1 -type f \( -name "*.svg" -o -name "*.ai" -o -name "*.eps" \) -exec mv {} Images/Vectoriel/ \; 2>/dev/null
-
-# Audio/Vidéo
-find . -maxdepth 1 -type f \( -name "*.mp3" -o -name "*.wav" -o -name "*.flac" -o -name "*.aac" -o -name "*.ogg" \) -exec mv {} Audio/ \; 2>/dev/null
-find . -maxdepth 1 -type f \( -name "*.mp4" -o -name "*.mov" -o -name "*.avi" -o -name "*.mkv" -o -name "*.wmv" \) -exec mv {} Videos/ \; 2>/dev/null
-
-# Archives
-find . -maxdepth 1 -type f \( -name "*.zip" -o -name "*.rar" -o -name "*.7z" -o -name "*.tar" -o -name "*.gz" \) -exec mv {} Archives/ \; 2>/dev/null
-
-# Exclure certains fichiers du déplacement vers "Autres"
-find . -maxdepth 1 -type f -not -name "*.sh" -not -name "*.bat" -not -name "*.ini" -not -name "*.lnk" -not -path "*/\.*" \
-  -not -path "./Documents/*" -not -path "./Images/*" -not -path "./Audio/*" -not -path "./Videos/*" \
-  -not -path "./Archives/*" -not -path "./Programmes/*" -not -path "./Autres/*" \
-  -exec mv {} Autres/ \; 2>/dev/null
-
-echo "Classement terminé !"
-```
-
-### Instructions d'utilisation :
-
-#### Pour le script Batch (Windows) :
+Pour l'utiliser:
 1. Copiez le code dans un fichier texte
 2. Enregistrez-le avec l'extension .bat (par exemple "organiser_downloads.bat")
 3. Double-cliquez sur le fichier pour l'exécuter
 
-#### Pour le script Bash (Linux/Mac) :
-1. Copiez le code dans un fichier texte
-2. Enregistrez-le avec l'extension .sh (par exemple "organiser_downloads.sh")
-3. Rendez-le exécutable avec la commande : `chmod +x organiser_downloads.sh`
-4. Exécutez-le avec : `./organiser_downloads.sh`
-
-Ces scripts vont créer plusieurs dossiers pour organiser vos fichiers par catégorie et déplacer tous vos fichiers téléchargés dans les dossiers appropriés selon leur extension. Voulez-vous que je modifie certaines catégories ou que j'ajoute d'autres types de fichiers ?​​​​​​​​​​​​​​​​
+Y a-t-il d'autres types de fichiers ou catégories spécifiques que vous souhaiteriez ajouter?​​​​​​​​​​​​​​​​
