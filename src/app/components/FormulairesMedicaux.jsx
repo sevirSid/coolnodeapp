@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useRef } from ‘react’;
 import { Printer, FileText, Users, Calendar, Save, Download, Plus, Edit3, Hospital, UserCheck } from ‘lucide-react’;
 
