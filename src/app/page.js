@@ -1,5 +1,5 @@
-import FormulairesMedicaux from './components/FormulairesMedicaux';
+import AnnonceAID from './components/AnnonceAID';
 
 export default function Home() {
-    return <FormulairesMedicaux />;
+    return <AnnonceAID />;
 }
