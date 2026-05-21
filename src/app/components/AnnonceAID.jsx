@@ -11,10 +11,10 @@ import defaultLogo from './IMG_4552.jpeg'; // Chemin vers votre image par défau
 
 const AnnonceAID = () => {
   // États pour les textes modifiables
-  const [title, setTitle] = useState("LA PRIÈRE DE L'AÏD EL FITR");
-  const [subtitle, setSubtitle] = useState("صلاة عيد الفطر");
-  const [info, setInfo] = useState("À partir de 8h30 - A la mosquée de Niort");
-  const [infoArabic, setInfoArabic] = useState("ابتداءً من الساعة ٨:٣٠ - في مسجد نيور");
+  const [title, setTitle] = useState("LA PRIÈRE DE L'AÏD AL ADHA");
+  const [subtitle, setSubtitle] = useState("صلاة عيد الأضحى");
+  const [info, setInfo] = useState("À partir de 7h00 - A la mosquée de Niort");
+  const [infoArabic, setInfoArabic] = useState("ابتداءً من الساعة ٧:٠٠ - في مسجد نيور");
   const [address, setAddress] = useState("48 bis rue Henri Sellier, 79000 NIORT, France");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingSubtitle, setIsEditingSubtitle] = useState(false);
@@ -141,7 +141,7 @@ const AnnonceAID = () => {
       const imgY = 10;
       
       pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-      pdf.save('Annonce_Aid_El_Fitr.pdf');
+      pdf.save('Annonce_Aid_Al_Adha.pdf');
     }).catch(error => {
       console.error('Erreur lors de la génération du PDF:', error);
       alert('Une erreur est survenue lors de la génération du PDF. Veuillez réessayer.');
@@ -509,28 +509,28 @@ const AnnonceAID = () => {
           </thead>
           <tbody>
             <tr>
-              <td style={styles.td}>8h30</td>
+              <td style={styles.td}>7h00</td>
               <td style={styles.td}>Tahleel et Tahmeed</td>
               <td style={styles.td}>تهليل و تحميد</td>
-              <td style={styles.td}>8:30</td>
+              <td style={styles.td}>7:00</td>
             </tr>
             <tr style={styles.trEven}>
-              <td style={styles.td}>9h00</td>
+              <td style={styles.td}>7h45</td>
               <td style={styles.td}>Sermon en Français</td>
               <td style={styles.td}>الخطبة بالفرنسية</td>
-              <td style={styles.td}>9:00</td>
+              <td style={styles.td}>7:45</td>
             </tr>
             <tr>
-              <td style={styles.td}>9h20</td>
+              <td style={styles.td}>8h00</td>
               <td style={styles.td}>Prière de l'Aïd</td>
               <td style={styles.td}>صلاة العيد</td>
-              <td style={styles.td}>9:20</td>
+              <td style={styles.td}>8:00</td>
             </tr>
             <tr style={styles.trEven}>
-              <td style={styles.td}>9h30</td>
+              <td style={styles.td}>Après</td>
               <td style={styles.td}>Sermon en Arabe</td>
               <td style={styles.td}>الخطبة بالعربية</td>
-              <td style={styles.td}>9:30</td>
+              <td style={styles.td}>بعد الصلاة</td>
             </tr>
           </tbody>
         </table>
@@ -540,7 +540,7 @@ const AnnonceAID = () => {
           <p>⚠️ <strong>القيام بالوضوء في المنزل</strong></p>
         </div>
 
-        <p style={styles.note}>* Le jour de l'Aïd el-Fitr sera le dimanche 30 mars ou 31 mars</p>
+        <p style={styles.note}>* Le jour de l'Aïd Al-Adha sera annoncé officiellement</p>
       </div>
       
       {/* Bouton de téléchargement - en dehors du conteneur d'impression */}
